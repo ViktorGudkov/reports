@@ -1,0 +1,695 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Рынок облигаций РФ · 27.07.2026 — 02.08.2026</title>
+<style>
+
+  :root{
+    --bg:#141D3B; --surface:#1E2A4D; --surface2:#26325A;
+    --accent:#2ECDA7; --accent-dim:#1E8E74;
+    --text:#E4E8F4; --text-hi:#FFFFFF; --muted:#8A93B0;
+    --neg:#FF7B7B; --line:#2A365A;
+    --sans:'Helvetica Neue',Helvetica,Arial,'Liberation Sans',sans-serif;
+    --mono:ui-monospace,'SF Mono','Cascadia Mono',Menlo,Consolas,'DejaVu Sans Mono',monospace;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth}
+  body{background:var(--bg);color:var(--text);font-family:var(--sans);font-size:16px;line-height:1.5;
+       -webkit-font-smoothing:antialiased;padding-bottom:70px}
+  .wrap{max-width:1140px;margin:0 auto;padding:0 24px}
+  .num{font-family:var(--mono);font-variant-numeric:tabular-nums;font-feature-settings:"tnum"}
+
+  /* Левый отступ обязателен: акцентная полоса ::before стоит в left:0 и без него
+     ложится поверх первых букв заголовка и подписей. */
+  header{padding:30px 0 24px 18px;position:relative}
+  header::before{content:'';position:absolute;left:0;top:0;bottom:0;width:5px;background:var(--accent)}
+  .eyebrow{display:flex;justify-content:space-between;align-items:baseline;flex-wrap:wrap;gap:8px;margin-bottom:16px}
+  .brand{color:var(--accent);font-size:12.5px;font-weight:700;letter-spacing:3.4px;text-transform:uppercase}
+  .genmeta{color:var(--muted);font-size:12.5px}
+  h1{font-size:clamp(28px,4.6vw,46px);font-weight:700;letter-spacing:-1.1px;line-height:1.02;color:var(--text-hi)}
+  .period{color:var(--accent);font-size:clamp(14px,1.9vw,18px);font-weight:600;margin-top:7px}
+
+  .tiles{display:grid;grid-template-columns:repeat(auto-fit,minmax(166px,1fr));gap:10px;margin:22px 0 8px}
+  .tile{background:var(--surface);border-radius:11px;padding:15px 17px;border-left:3px solid var(--accent)}
+  .tile.warn{border-left-color:var(--neg)}
+  .tile .lab{color:var(--muted);font-size:12px;font-weight:500;margin-bottom:8px;line-height:1.3}
+  .tile .val{font-size:27px;font-weight:700;color:var(--text-hi);letter-spacing:-.8px;line-height:1}
+  .tile .val .u{font-size:15px;color:#B4BCD4;margin-left:3px;font-weight:500;letter-spacing:0}
+  .tile .dlt{font-size:12.5px;font-weight:700;margin-top:7px;color:var(--accent)}
+  .tile .dlt.neg{color:var(--neg)}
+
+  .toolbar{display:flex;align-items:center;gap:10px;flex-wrap:wrap;
+           padding:16px 0 6px;border-top:1px solid var(--line);margin-top:22px}
+  .toolbar .cap{color:var(--muted);font-size:12px;letter-spacing:2.2px;text-transform:uppercase;font-weight:700;margin-right:auto}
+  button.tb{background:transparent;border:1px solid var(--line);color:var(--text);
+    font-family:var(--sans);font-size:13px;font-weight:600;padding:8px 15px;
+    border-radius:8px;cursor:pointer;transition:border-color .15s,color .15s}
+  button.tb:hover{border-color:var(--accent);color:var(--accent)}
+  button.tb:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+
+  .sec{background:var(--surface);border-radius:13px;margin-top:10px;overflow:hidden;
+       border:1px solid transparent;transition:border-color .16s}
+  .sec[open]{border-color:var(--line)}
+  .sec > summary{cursor:pointer;list-style:none;padding:17px 20px;display:flex;gap:16px;align-items:flex-start;
+    -webkit-tap-highlight-color:transparent}
+  .sec > summary::-webkit-details-marker{display:none}
+  .sec > summary:hover .stitle{color:var(--accent)}
+  .sec > summary:focus-visible{outline:2px solid var(--accent);outline-offset:-2px;border-radius:13px}
+  .sno{font-family:var(--mono);font-size:12px;font-weight:700;color:var(--accent);
+    border:1px solid var(--accent-dim);border-radius:6px;
+    width:30px;height:30px;flex:none;display:flex;align-items:center;justify-content:center;margin-top:1px}
+  .sec[open] .sno{background:var(--accent);color:#0E1530;border-color:var(--accent)}
+  .shead{flex:1;min-width:0}
+  .stitle{font-size:17px;font-weight:700;color:var(--text-hi);line-height:1.25;transition:color .15s}
+  .sdigest{font-size:13.5px;color:var(--muted);margin-top:5px;line-height:1.45;display:block}
+  .sdigest b{color:var(--text);font-weight:600}
+  .chev{flex:none;width:26px;height:26px;border-radius:7px;background:var(--surface2);
+    display:flex;align-items:center;justify-content:center;margin-top:3px;
+    color:var(--accent);font-size:15px;line-height:1;transition:transform .2s,background .15s}
+  .sec[open] .chev{transform:rotate(45deg);background:rgba(46,205,167,.16)}
+  .sbody{padding:2px 20px 22px}
+  @media(prefers-reduced-motion:reduce){.chev{transition:none}html{scroll-behavior:auto}}
+
+  .block{background:#19233F;border-radius:11px;padding:19px 21px}
+  .cols2{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+  @media(max-width:840px){.cols2{grid-template-columns:1fr}}
+  .btitle{font-size:14.5px;font-weight:700;color:var(--text-hi);margin-bottom:3px}
+  .bsub{font-size:12.5px;color:var(--muted);margin-bottom:15px;line-height:1.45}
+  .mt10{margin-top:10px}
+
+  svg{display:block;width:100%;height:auto;overflow:visible}
+  .axlab{fill:var(--muted);font-size:11px;font-family:var(--mono)}
+  .axlab.t{fill:#9AA3BE;font-size:11.5px}
+  .grid{stroke:var(--line);stroke-width:1;stroke-dasharray:2 4;opacity:.55}
+  .ax{stroke:var(--line);stroke-width:1}
+
+  .legend{display:flex;gap:16px;flex-wrap:wrap;margin-bottom:13px}
+  .legend div{display:flex;align-items:center;gap:7px;font-size:12.5px}
+  .swatch{width:16px;height:3px;border-radius:2px;display:inline-block}
+
+  table{width:100%;border-collapse:collapse;font-size:13.5px}
+  th{text-align:left;color:var(--muted);font-size:10.5px;font-weight:700;letter-spacing:1.1px;
+     text-transform:uppercase;padding:0 10px 8px 0;border-bottom:1px solid var(--line);white-space:nowrap}
+  th.r,td.r{text-align:right;padding-right:0}
+  td{padding:9px 10px 9px 0;border-bottom:1px solid rgba(42,54,90,.5);vertical-align:top}
+  tr:last-child td{border-bottom:none}
+  td.em{color:var(--text-hi);font-weight:600}
+  .tag{display:inline-block;font-size:10px;font-weight:700;letter-spacing:.6px;text-transform:uppercase;
+       padding:3px 7px;border-radius:5px;white-space:nowrap}
+  .tag.fl{background:rgba(46,205,167,.16);color:var(--accent)}
+  .tag.op{background:rgba(255,123,123,.15);color:var(--neg)}
+
+  .ev{border-bottom:1px solid var(--line)}
+  .ev:last-child{border-bottom:none}
+  .ev summary{cursor:pointer;padding:13px 0;display:flex;gap:12px;align-items:flex-start;list-style:none;
+              font-weight:600;color:var(--text-hi);font-size:14.5px;line-height:1.4}
+  .ev summary::-webkit-details-marker{display:none}
+  .ev summary:hover{color:var(--accent)}
+  .ev summary::after{content:'+';margin-left:auto;color:var(--accent);font-size:18px;line-height:1;flex:none;padding-left:10px}
+  .ev[open] summary::after{content:'\2212'}
+  .ev .evb{padding:0 0 16px 0;color:var(--text);font-size:14px;line-height:1.62}
+  .ev .evb p+p{margin-top:10px}
+  .evdate{font-family:var(--mono);color:var(--accent);font-size:12px;font-weight:700;flex:none;padding-top:2px;width:58px}
+
+  ol.corr{list-style:none;counter-reset:c}
+  ol.corr li{counter-increment:c;position:relative;padding:15px 0 15px 40px;border-bottom:1px solid var(--line);
+             font-size:14px;line-height:1.6}
+  ol.corr li:last-child{border-bottom:none}
+  ol.corr li::before{content:counter(c);position:absolute;left:0;top:15px;font-family:var(--mono);
+    color:var(--accent);font-weight:700;font-size:12px;border:1px solid var(--accent-dim);border-radius:5px;
+    width:23px;height:23px;display:flex;align-items:center;justify-content:center}
+  ol.corr b{color:var(--text-hi)}
+
+  .note{font-size:12.5px;color:var(--muted);line-height:1.5;margin-top:12px}
+  .prose{font-size:14.5px;line-height:1.65}
+  .prose p+p{margin-top:12px}
+  .prose b{color:var(--text-hi)}
+
+  footer{border-top:1px solid var(--line);margin-top:32px;padding-top:20px;display:flex;
+         justify-content:space-between;gap:16px;flex-wrap:wrap;color:var(--muted);font-size:12.5px;line-height:1.6}
+  footer .r{color:var(--accent);font-weight:700}
+
+  @media print{
+    body{background:#fff;color:#111;padding:0}
+    .toolbar,.chev{display:none}
+    .sec,.block,.tile{background:#f4f5f8;border:1px solid #ccd;break-inside:avoid}
+    .sbody{display:block!important}
+    h1,.stitle,.btitle,td.em{color:#111}
+  }
+
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<header>
+  <div class="eyebrow">
+    <div class="brand">Еженедельный обзор · @curioai</div>
+    <div class="genmeta">Сформирован 03.08.2026 01:36 · обработано 380 событий</div>
+  </div>
+  <h1>Рынок облигаций РФ</h1>
+  <div class="period">27.07.2026 — 02.08.2026</div>
+</header>
+
+<div class="tiles">
+  <div class="tile">
+    <div class="lab">Доходность ОФЗ 2Y</div>
+    <div class="val num">14,58<span class="u">%</span></div>
+    <div class="dlt num">-5,9 б.п.</div>
+  </div>
+  <div class="tile">
+    <div class="lab">Наклон ОФЗ 10Y − 2Y</div>
+    <div class="val num">111<span class="u">б.п.</span></div>
+    <div class="dlt num">-14 б.п.</div>
+  </div>
+  <div class="tile">
+    <div class="lab">G-спред AAA, 2–3Y</div>
+    <div class="val num">49<span class="u">б.п.</span></div>
+    <div class="dlt num">-12 б.п.</div>
+  </div>
+  <div class="tile warn">
+    <div class="lab">Маржа AAA-флоатеров</div>
+    <div class="val num">134<span class="u">б.п.</span></div>
+    <div class="dlt neg num">+3 б.п.</div>
+  </div>
+  <div class="tile">
+    <div class="lab">Среднедневной оборот</div>
+    <div class="val num">67,0<span class="u">млрд ₽</span></div>
+    
+  </div>
+</div>
+
+<div class="toolbar">
+  <span class="cap">Разделы отчёта</span>
+  <button class="tb" id="btnAll">Развернуть всё</button>
+  <button class="tb" id="btnPrint">Печать / PDF</button>
+</div>
+
+<details class="sec" id="curve" open>
+  <summary>
+    <span class="sno">01</span>
+    <span class="shead">
+      <span class="stitle">Кривая доходности ОФЗ</span>
+      <span class="sdigest">Средний сдвиг за период — <b>-12 б.п.</b></span>
+    </span>
+    <span class="chev">+</span>
+  </summary>
+  <div class="sbody">
+    <div class="block">
+      <div class="btitle">Сдвиг кривой за период</div>
+      <div class="bsub">Верхний график — кривая на начало и конец периода, нижний — изменение по каждой точке.</div>
+      <div id="curveChart"></div>
+    </div>
+    <div class="cols2 mt10">
+      <div class="block"><div class="btitle">Наклон 10Y − 2Y по дням</div><div id="slopeChart"></div></div>
+      <div class="block"><div class="btitle">Все точки кривой</div>
+        <table><thead><tr><th>Срок</th><th class="r">начало</th><th class="r">конец</th><th class="r">Δ, б.п.</th></tr></thead>
+        <tbody id="curveTable"></tbody></table></div>
+    </div>
+  </div>
+</details>
+
+<details class="sec" id="spread">
+  <summary>
+    <span class="sno">02</span>
+    <span class="shead">
+      <span class="stitle">Кредитные спреды AAA</span>
+      <span class="sdigest"></span>
+    </span>
+    <span class="chev">+</span>
+  </summary>
+  <div class="sbody">
+    <div class="block">
+      <div class="btitle">G-спред фиксов и маржа флоатеров по дням</div>
+      <div class="legend">
+        <div><span class="swatch" style="background:var(--neg)"></span>G-спред AAA (фикс)</div>
+        <div><span class="swatch" style="background:var(--accent)"></span>Скорр. маржа флоатеров</div>
+      </div>
+      <div id="spreadChart"></div>
+    </div>
+  </div>
+</details>
+
+<details class="sec" id="turn">
+  <summary>
+    <span class="sno">03</span>
+    <span class="shead">
+      <span class="stitle">Торговые обороты</span>
+      <span class="sdigest"><b>335,0 млрд ₽</b> за 5 дней</span>
+    </span>
+    <span class="chev">+</span>
+  </summary>
+  <div class="sbody">
+    <div class="block">
+      <div class="btitle">Оборот по дням</div>
+      <div class="legend"><div><span class="swatch" style="background:var(--accent)"></span>ОФЗ</div>
+      <div><span class="swatch" style="background:#5A6894"></span>Корпоративные</div></div>
+      <div id="turnChart"></div>
+    </div>
+    <div class="block mt10"><div class="btitle">Структура по типу ставки</div>
+      <div id="rateTypeChart"></div></div>
+    <div class="block mt10"><div class="btitle">Структура по срокам до погашения</div>
+      <div id="termChart"></div></div>
+  </div>
+</details>
+
+<details class="sec" id="rate">
+  <summary>
+    <span class="sno">04</span>
+    <span class="shead">
+      <span class="stitle">Ожидания по ключевой ставке</span>
+      <span class="sdigest"></span>
+    </span>
+    <span class="chev">+</span>
+  </summary>
+  <div class="sbody">
+    <div class="block"><div class="prose">КОРОТКО. За период рыночные ожидания разошлись по горизонтам: короткие деньги подорожали (это ястребиный сдвиг), а ожидания по ставке на горизонте от 9 месяцев и дальше заметно смягчились. Вероятностная модель на конец периода даёт перевес сценарию снижения ставки на ближайшем заседании (53%) при высокой вероятности удержания (40%), но её точечная оценка изменения ставки положительная — то есть определённости мало, интервал широкий.<br><br>(а) ВЕРОЯТНОСТНАЯ ОЦЕНКА РЕШЕНИЯ ЦБ. Речь идёт о модели машинного обучения (GBM), обученной на исторической динамике ставки денежного рынка RUSFAR 3M — главного рыночного предиктора решений Банка России — и оценивающей вероятности решения ЦБ по ключевой ставке. По состоянию на 31.07 модель даёт: снижение — 53%, удержание — 40%, повышение — 8%. По размеру шага наиболее вероятны сохранение ставки (0 б.п. — 40%) и снижение на 25 б.п. (36%), третий по весу сценарий — снижение на 50 б.п. (14%). Точечная оценка изменения ключевой ставки: +11 б.п., 80%-й интервал — от −33 до +55 б.п. До ближайшего заседания 11 сентября остаётся около 40 дней; на таком горизонте приоритет в интерпретации — у откалиброванной вероятностной модели, а не у простого порогового правила.<br><br>(б) РЫНОЧНЫЕ ИНДИКАТОРЫ. RUSFAR 3M (ставка обеспеченного фондирования) выросла с 13,93% до 14,11%, а её спред к ключевой ставке сместился с −7 б.п. до +11 б.п. — рост на 18 б.п., то есть ястребиный сдвиг в коротком фондировании; при этом за 5 торговых дней сама ставка RUSFAR снизилась на 0,15 п.п., за 10 дней — на 0,36 п.п., так что недельное движение спреда идёт против более длинного тренда. Пороговое правило (простая детерминированная модель, которая относит сигнал к снижению/удержанию/повышению в зависимости от того, в какой диапазон попадает спред RUSFAR 3M к ключевой ставке) на обоих концах периода указывает на «УДЕРЖАНИЕ» — направление сигнала не изменилось. Свопы на ключевую ставку (IRS) сместились в диапазоне от +2,5 б.п. до −38 б.п.: на самом коротком участке (3M, 6M) ставки почти не изменились, а начиная с 9M произошёл выраженный сдвиг вниз, максимальный на 3Y (−38 б.п.), 6–7Y (−34 б.п.), 5Y (−33 б.п.) и 10Y (−32 б.п.). Это означает, что рынок закладывает более низкую среднюю траекторию ставки на горизонте от года и дальше при неизменных ожиданиях на ближайшие месяцы. Кривая ОФЗ как контекст: средний сдвиг уровня за период −12 б.п., изменение наклона 10Y−1Y −4 б.п. — то есть смягчение ожиданий проявилось в уровне доходностей, а не в форме кривой.<br><br>(в) НОВОСТНОЙ ФОН ПО ДКП. За период зафиксировано 3 ястребиных сигнала (средняя сила 0,50) и 4 голубиных (0,55); нетто-баланс по числу −1, взвешенный по силе — −0,70, то есть в целом фон умеренно голубиный. По факторам: заявления ЦБ дали 3 голубиных сигнала, инфляция — 1 голубиный, курс рубля — 3 ястребиных. Внутри периода настроения слегка смещались к ужесточению: нетто-сила в первой половине −0,40, во второй −0,30 (сдвиг +0,10). Это согласуется с потоком событий: снижение ставки ЦБ и замедление недельной инфляции до 0,04% — голубиная сторона, тогда как повышение прогноза инфляции ЦБ до 6–7%, пересмотр прогнозов ставки ВТБ (до 13,5% с 12% на конец 2026 года) и Альфа-банка (с 13% до 13,5%), а также повышение прогноза инфляции Сбербанком до 6,5–7% — ястребиная.<br><br>РАСХОЖДЕНИЕ МОДЕЛИ И РЫНКА. Индикаторы указывают в разные стороны: спред RUSFAR к ключевой ставке за период вырос (ястребино) и совпадает по знаку с положительной точечной оценкой модели (+11 б.п.), но при этом свопы IRS на среднем и длинном участке и уровень кривой ОФЗ ушли вниз (голубино), а направленческие вероятности модели отдают перевес снижению (53%). Вероятностная модель опирается на накопленные данные и может отставать от резких движений рыночных индикаторов, поэтому свежий сдвиг спреда денежного рынка отражается в ней не мгновенно. Широкий 80%-й интервал (−33…+55 б.п.) сам по себе указывает на низкую определённость. КРОСС-ЧТЕНИЕ С ТОРГАМИ: смягчение ожиданий на длинном горизонте согласуется с концентрацией оборота ОФЗ в дальних бумагах (85,7% в сегментах 5–10 лет и свыше 10 лет) и снижением доходностей дальнего конца на 15–20 б.п.; одновременно рост доли флоатеров в обороте ОФЗ с 5,5% до 8,6% и расширение скорректированной маржи AAA флоатеров 29–30.07 указывают на сохраняющийся интерес к защите от процентного риска при неопределённой траектории ставки.</div></div>
+  </div>
+</details>
+
+<details class="sec" id="prim">
+  <summary>
+    <span class="sno">05</span>
+    <span class="shead">
+      <span class="stitle">Первичный рынок</span>
+      <span class="sdigest">Книг за период: <b>10</b></span>
+    </span>
+    <span class="chev">+</span>
+  </summary>
+  <div class="sbody">
+    <div class="block">      <table>
+        <thead><tr><th>Эмитент, серия</th><th>Статус</th><th class="r">Объём</th>
+        <th class="r">Спред</th><th>Хронология</th></tr></thead>
+        <tbody>
+          <tr>
+            <td class="em">«СИБУР Холдинга»<br>
+              <span style="color:var(--muted);font-weight:400">001Р-10
+               · RU000A10FRF0</span></td>
+            <td><span class="tag fl">размещено</span></td>
+            <td class="r num em">250 млн долл</td>
+            <td class="r num">—</td>
+            <td class="num" style="font-size:12px;color:var(--muted)">22.07 opened; 28.07 placed<br>
+              размещение: 2026-07-28</td>
+          </tr>
+          <tr>
+            <td class="em">Совкомбанк<br>
+              <span style="color:var(--muted);font-weight:400">СО-1-013
+               · RU000A10FMW6</span></td>
+            <td><span class="tag fl">размещено</span></td>
+            <td class="r num em">—</td>
+            <td class="r num">—</td>
+            <td class="num" style="font-size:12px;color:var(--muted)">27.07 placed<br>
+              размещение: 2026-07-20</td>
+          </tr>
+          <tr>
+            <td class="em">Совкомбанк<br>
+              <span style="color:var(--muted);font-weight:400">СО-1-014
+               · RU000A10FMX4</span></td>
+            <td><span class="tag fl">размещено</span></td>
+            <td class="r num em">—</td>
+            <td class="r num">—</td>
+            <td class="num" style="font-size:12px;color:var(--muted)">27.07 placed<br>
+              размещение: 2026-07-20</td>
+          </tr>
+          <tr>
+            <td class="em">«Элемент Лизинг»<br>
+              <span style="color:var(--muted);font-weight:400">КО-02
+               · RU000A10FR16</span></td>
+            <td><span class="tag fl">размещено</span></td>
+            <td class="r num em">2 млрд рублей</td>
+            <td class="r num">—</td>
+            <td class="num" style="font-size:12px;color:var(--muted)">27.07 placed<br>
+              размещение: 2026-07-27</td>
+          </tr>
+          <tr>
+            <td class="em">«Лид Капитал»<br>
+              <span style="color:var(--muted);font-weight:400">001P-02
+               · RU000A10FT14</span></td>
+            <td><span class="tag fl">закрыта</span></td>
+            <td class="r num em">10 млн долл</td>
+            <td class="r num">—</td>
+            <td class="num" style="font-size:12px;color:var(--muted)">29.07 opened; 29.07 closed<br>
+              размещение: 2026-08-03</td>
+          </tr>
+          <tr>
+            <td class="em">«МегаФон»<br>
+              <span style="color:var(--muted);font-weight:400">БО-002P-14
+              </span></td>
+            <td><span class="tag fl">закрыта</span></td>
+            <td class="r num em">—</td>
+            <td class="r num">—</td>
+            <td class="num" style="font-size:12px;color:var(--muted)">29.07 opened; 31.07 opened; 31.07 closed<br>
+              размещение: 2026-08-06</td>
+          </tr>
+          <tr>
+            <td class="em">МФК «Быстроденьги»<br>
+              <span style="color:var(--muted);font-weight:400">003Р-03
+               · RU000A10FMR6</span></td>
+            <td><span class="tag fl">размещено</span></td>
+            <td class="r num em">500 млн рублей</td>
+            <td class="r num">—</td>
+            <td class="num" style="font-size:12px;color:var(--muted)">30.07 placed<br>
+              размещение: 2026-07-10</td>
+          </tr>
+          <tr>
+            <td class="em">«А Спэйс»<br>
+              <span style="color:var(--muted);font-weight:400">001Р-03
+               · RU000A10FSG6</span></td>
+            <td><span class="tag fl">размещено</span></td>
+            <td class="r num em">500 млн рублей</td>
+            <td class="r num">—</td>
+            <td class="num" style="font-size:12px;color:var(--muted)">30.07 placed<br>
+              размещение: 2026-07-30</td>
+          </tr>
+          <tr>
+            <td class="em">«ВУШ»<br>
+              <span style="color:var(--muted);font-weight:400">001P-07
+               · RU000A10FGU2</span></td>
+            <td><span class="tag fl">размещено</span></td>
+            <td class="r num em">1 млрд рублей</td>
+            <td class="r num">—</td>
+            <td class="num" style="font-size:12px;color:var(--muted)">31.07 placed<br>
+              размещение: 2026-06-23</td>
+          </tr>
+          <tr>
+            <td class="em">«ЭкономЛизинг»<br>
+              <span style="color:var(--muted);font-weight:400">002Р-03
+               · RU000A10FSV5</span></td>
+            <td><span class="tag fl">размещено</span></td>
+            <td class="r num em">100 млн рублей</td>
+            <td class="r num">—</td>
+            <td class="num" style="font-size:12px;color:var(--muted)">31.07 placed<br>
+              размещение: 2026-07-31</td>
+          </tr>
+        </tbody>
+      </table></div>
+  </div>
+</details>
+
+<details class="sec" id="top">
+  <summary>
+    <span class="sno">06</span>
+    <span class="shead">
+      <span class="stitle">Топ корпоративных выпусков</span>
+      <span class="sdigest"></span>
+    </span>
+    <span class="chev">+</span>
+  </summary>
+  <div class="sbody">
+    <div class="cols2">
+      <div class="block"><div class="btitle">Лидеры оборота за период</div>
+        <table><thead><tr><th>Выпуск</th><th class="r">Оборот</th><th class="r">Доля</th><th class="r">Сделок</th></tr></thead>
+        <tbody id="topTable"></tbody></table></div>
+      <div class="block"><div class="btitle">Лидер каждого дня</div>
+        <table><thead><tr><th>День</th><th>Выпуск</th><th class="r">Оборот</th><th class="r">Доля дня</th></tr></thead>
+        <tbody id="dayTable"></tbody></table></div>
+    </div>
+  </div>
+</details>
+
+<details class="sec" id="events">
+  <summary>
+    <span class="sno">07</span>
+    <span class="shead">
+      <span class="stitle">Ключевые события</span>
+      <span class="sdigest">Сюжетов: <b>12</b></span>
+    </span>
+    <span class="chev">+</span>
+  </summary>
+  <div class="sbody">
+    <div class="block" style="padding:2px 21px">
+      <details class="ev" open>
+        <summary><span class="evdate">24.07 (ставка действует с 27.07)</span>
+        <span>ЦБ снизил ключевую ставку на 25 б.п. до 14,00%, повысив прогноз инфляции на 2026 год до 6–7%</span></summary>
+        <div class="evb"><p>Совет директоров Банка России 24 июля принял решение о снижении ключевой ставки с 14,25% до 14,00% годовых; ставка действует с 27 июля 2026 года — с первого торгового дня отчётного периода. Следующее заседание намечено на 11 сентября 2026 года.</p><p>Одновременно регулятор повысил прогноз инфляции на 2026 год с 4,5–5,5% до 6–7% и понизил прогноз роста ВВП с 0,5–1,5% до 0–1%. По данным ряда источников (требует проверки), обновлённый ориентир ключевой ставки на конец 2026 года составляет 13,5–13,75%. ЦБ также снизил макропруденциальные лимиты по необеспеченным потребкредитам и автокредитам на IV квартал 2026 года и сохранил антициклическую надбавку к капиталу банков на уровне 0,5%.</p></div>
+      </details>
+      <details class="ev">
+        <summary><span class="evdate">за нед.</span>
+        <span>За неделю зафиксирован 31 случай неисполнения обязательств по облигациям — техдефолты ММЗ, ЛКХ, ЖКХ РС(Я), Евротранса</span></summary>
+        <div class="evb"><p>По сообщениям источников, за неделю на российском долговом рынке зафиксирован 31 случай неисполнения обязательств по облигациям, включая дефолты и технические дефолты различных эмитентов.</p><p>В периоде опубликованы сообщения о техническом дефолте Михайловского молочного завода по 12-му купону серии 001Р-03 (сумма неисполненного обязательства в телеграм-сообщениях указывается на уровне около 0,4 млн руб. — цифра требует проверки) и об инициировании ММЗ реструктуризации облигаций серии 001Р-01; о техническом дефолте ООО «Ландскейп констракшн хаб» (ЛКХ) по 18-му купону серии БО-02; о техническом дефолте ЖКХ РС(Я) по погашению серии БО-01 и выплате НКД за 28-й купонный период; о техническом дефолте Евротранса по купону серии БО-001Р-08. При этом ЕвроТранс, по сообщениям, вышел из технического дефолта по одному из выпусков, выплатив просроченный купон, и 31.07 произвёл выплату купонного дохода 41,9 млн руб. по серии БО-001Р-03.</p></div>
+      </details>
+      <details class="ev">
+        <summary><span class="evdate">1П26</span>
+        <span>Число эмитентов с первичными дефолтами/техдефолтами в 1П26 выросло до 21 против 15 годом ранее</span></summary>
+        <div class="evb"><p>Количество эмитентов облигаций и ЦФА, допустивших первичные дефолты или технические дефолты в первом полугодии 2026 года, увеличилось до 21 против 15 годом ранее.</p><p>По данным ряда публикаций, число дефолтов на рынке облигаций выросло более чем на 50%, затронув порядка 20 компаний и 43 выпуска общей стоимостью около 13 млрд руб.; в сегменте высокодоходных облигаций число дефолтных эмитентов увеличилось почти вдвое. Детализация цифр между источниками расходится и требует проверки.</p></div>
+      </details>
+      <details class="ev">
+        <summary><span class="evdate">за нед.</span>
+        <span>Минфин зарегистрировал два новых выпуска ОФЗ с плавающим купоном (RUONIA) совокупным объёмом 1,5 трлн руб.</span></summary>
+        <div class="evb"><p>В периоде сообщалось о регистрации двух новых выпусков ОФЗ с плавающей ставкой, привязанной к RUONIA, совокупным объёмом 1,5 трлн руб. Речь идёт именно о регистрации выпусков, а не о фактическом размещении.</p><p>Событие релевантно для структуры вторичного оборота: доля бумаг с плавающей ставкой в обороте ОФЗ выросла с 5,5% на предыдущей неделе до 8,6% в отчётном периоде.</p></div>
+      </details>
+      <details class="ev">
+        <summary><span class="evdate">за нед.</span>
+        <span>НКР понизило рейтинги Кронос (BB+.ru → B.ru) и ЛКХ (B+.ru → B.ru); рейтинг ГК «Медси» повышен до AA(RU)</span></summary>
+        <div class="evb"><p>НКР снизило кредитный рейтинг компании Кронос с BB+.ru до B.ru, установив негативный прогноз; решение мотивировано высокой зависимостью от ЕвроТранса и нестабильным состоянием топливного рынка. НКР также понизило рейтинг ООО «Ландскейп констракшн хаб» (ЛКХ) с B+.ru до B.ru и изменило прогноз со стабильного на неопределённый — эмитент в том же периоде допустил технический дефолт по 18-му купону серии БО-02.</p><p>В верхнем эшелоне, по сообщениям (проверено частично), кредитный рейтинг группы компаний «Медси» повышен с AA-(RU) до AA(RU) со стабильным прогнозом, рейтинги облигаций обновлены до уровня AA(RU).</p></div>
+      </details>
+      <details class="ev">
+        <summary><span class="evdate">27–29.07</span>
+        <span>Недельная инфляция 0,04%, годовая ~5,95%; рост ВВП в июне ускорился до 1,1% г/г</span></summary>
+        <div class="evb"><p>Инфляция в России с 21 по 27 июля составила 0,04%, годовой показатель — около 5,94–5,95%. Рост ВВП в июне ускорился до 1,1% г/г (в мае 0,3%), за первое полугодие рост экономики составил 0,3%.</p><p>Безработица в июне выросла на 0,1 п.п. до 2,2%, годовой прирост реальных зарплат замедлился на 0,6 п.п. до 4,5% г/г. По сообщениям источников, инфляционные ожидания населения в июле выросли до 14,7% с 12,4% в июне (передаётся как сообщение источников, требует проверки). Цены на бензин за неделю прибавили 0,6%, с начала года — 19%.</p></div>
+      </details>
+      <details class="ev">
+        <summary><span class="evdate">28–31.07</span>
+        <span>ВТБ, Альфа-банк и Сбербанк пересмотрели прогнозы: ставка на конец 2026 года — 13,5%, инфляция выше</span></summary>
+        <div class="evb"><p>ВТБ повысил прогнозную ключевую ставку на конец 2026 года до 13,5% с 12% и среднюю ключевую ставку до 14,5% с 14%, одновременно снизив прогноз роста ВВП до 0,6% с 1%. Аналитики Альфа-банка повысили прогноз ключевой ставки на конец 2026 года с 13% до 13,5%.</p><p>Сбербанк повысил прогноз инфляции на 2026 год до 6,5–7% с 6–6,5% и понизил прогноз роста ВВП до 0–0,5% с 0,5–1%, а также понизил прогноз роста корпоративного кредитования до 8–10% с 10–12% при сохранении розничного на уровне 5–8%.</p></div>
+      </details>
+      <details class="ev">
+        <summary><span class="evdate">за нед.</span>
+        <span>Банки сообщают о нехватке рублёвой ликвидности: ставки денежного рынка поднимались выше ключевой</span></summary>
+        <div class="evb"><p>По сообщениям (проверено частично), крупные российские банки испытывают нехватку рублёвой ликвидности, из-за чего ставки денежного рынка поднимались выше ключевой ставки ЦБ; на дефицит ликвидности указывал Сбербанк.</p><p>Это согласуется с динамикой RUSFAR 3M: за период ставка выросла с 13,93% до 14,11%, а её спред к ключевой ставке сместился с −7 б.п. до +11 б.п. Средняя максимальная ставка по вкладам топ-10 банков, по данным источников, выросла до 12,85%.</p></div>
+      </details>
+      <details class="ev">
+        <summary><span class="evdate">за нед.</span>
+        <span>Доходность длинных ОФЗ превысила 16% годовых в отдельных выпусках при 15Y G-curve 15,84%</span></summary>
+        <div class="evb"><p>В новостном потоке периода отмечалось, что доходность длинных ОФЗ превысила 16% годовых. По расчётной кривой G-curve точка 15Y на 31.07 составляет 15,84%, 10Y — 15,69%, то есть уровень выше 16% относится к отдельным выпускам, а не к расчётной кривой.</p><p>За период кривая ОФЗ сместилась вниз по всей длине: средний сдвиг уровня −12 б.п., наибольшее снижение на дальнем участке — 10Y (−19,5 б.п.), 9Y (−18,4 б.п.), 15Y (−18,3 б.п.).</p></div>
+      </details>
+      <details class="ev">
+        <summary><span class="evdate">28–31.07</span>
+        <span>СИБУР разместил облигации на $250 млн под 7,95%, МегаФон собрал книгу по флоатеру (ориентир спреда 120 б.п.)</span></summary>
+        <div class="evb"><p>«СИБУР Холдинг» 28 июля разместил трёхлетние облигации серии 001Р-10 объёмом 250 млн долларов со ставкой купона 7,95% годовых. «МегаФон» 31 июля провёл сбор заявок по облигациям серии БО-002P-14 с переменным купоном; заявленный при открытии книги объём — не менее 10 млрд руб., по сообщениям по итогам сбора объём составил 23 млрд руб. при ориентире спреда к ключевой ставке ЦБ 120 б.п. и сроке обращения около 2,6 года.</p><p>Госкорпорация «Дом.РФ» заявила о планах секьюритизировать ипотечные кредиты на общую сумму 850 млрд руб. во втором полугодии 2026 года.</p></div>
+      </details>
+      <details class="ev">
+        <summary><span class="evdate">30.07</span>
+        <span>Правительство ввело запрет на экспорт бензина до 31 января 2027 года и дизеля — до 1 сентября 2026 года</span></summary>
+        <div class="evb"><p>Правительство ввело временный запрет на экспорт бензина, дизельного, судового топлива и газойлей: по бензину — до 31 января 2027 года, по дизельному топливу, судовому топливу и газойлям — до 1 сентября 2026 года. Также приостановлены специальные правила определения цен при госзакупках моторного топлива до конца года.</p><p>Мера принята на фоне роста цен на бензин на 19% с начала года. Топливная тема прослеживается и в кредитных событиях периода: понижение рейтинга Кронос мотивировано в том числе нестабильным состоянием топливного рынка.</p></div>
+      </details>
+      <details class="ev">
+        <summary><span class="evdate">за нед.</span>
+        <span>Задержание руководства ГК «Эфко» и продвижение в Сенате США законопроекта о санкциях против РФ</span></summary>
+        <div class="evb"><p>Председатель совета директоров и основной акционер ГК «Эфко» Валерий Кустов задержан по подозрению в мошенничестве; по сообщениям, задержаны также генеральный директор и ряд топ-менеджеров группы.</p><p>В качестве внешнего фона отмечено продвижение в Сенате США законопроекта об ужесточении санкций против России, включая ограничения против высших должностных лиц, госкомпаний и банковского сектора.</p></div>
+      </details>
+    </div>
+  </div>
+</details>
+
+<details class="sec" id="corr">
+  <summary>
+    <span class="sno">08</span>
+    <span class="shead">
+      <span class="stitle">Корреляции и взаимосвязи</span>
+      <span class="sdigest"></span>
+    </span>
+    <span class="chev">+</span>
+  </summary>
+  <div class="sbody">
+    <div class="block"><ol class="corr"><li>Снижение ключевой ставки до 14,00% с 27 июля и смягчение ожиданий на среднем/длинном горизонте (IRS 9M–10Y от −20,5 до −38 б.п.) сопровождались смещением кривой ОФЗ вниз в среднем на 12 б.п., с максимальным движением на дальнем конце (10Y −19,5 б.п., 9Y −18,4 б.п., 15Y −18,3 б.п.). Именно дальний конец собрал основную ликвидность: сегменты 5–10 лет и «более 10 лет» дали 85,7% оборота ОФЗ за период. Пост от 02.08 о росте RGBI и снижении доходностей ОФЗ согласуется с этой динамикой.</li><li>Регистрация двух выпусков ОФЗ с плавающим купоном (RUONIA) на 1,5 трлн руб. совпала по времени с ростом доли флоатеров во вторичном обороте ОФЗ с 5,5% на предыдущей неделе до 8,6% в отчётном периоде. Прямой связи между регистрацией (первичный рынок) и оборотами вторичного рынка данные не показывают, поэтому фиксируем только совпадение.</li><li>Сообщения о нехватке рублёвой ликвидности и о том, что ставки денежного рынка поднимались выше ключевой, подтверждаются данными денежного рынка: спред RUSFAR 3M к ключевой ставке сместился с −7 б.п. до +11 б.п. (+18 б.п. за период), то есть трёхмесячное обеспеченное фондирование стало дороже ключевой ставки.</li><li>РАСХОЖДЕНИЕ. Ставки денежного рынка дрейфовали ястребино (спред RUSFAR +18 б.п., точечная оценка модели +11 б.п.), тогда как новостной фон по ДКП был умеренно голубиным (взвешенный нетто-баланс −0,70 при 4 голубиных и 3 ястребиных сигналах), а IRS на горизонте от 9 месяцев и кривая ОФЗ ушли вниз. Внутри периода настроения новостного фона при этом слегка сместились к ужесточению (сдвиг +0,10), что согласуется с потоком пересмотров прогнозов: ВТБ повысил прогноз ставки на конец 2026 года до 13,5% с 12%, Альфа-банк — с 13% до 13,5%, Сбербанк повысил прогноз инфляции до 6,5–7%.</li><li>Волна кредитных событий (31 случай неисполнения обязательств за неделю, техдефолты ММЗ, ЛКХ, ЖКХ РС(Я), Евротранса, понижения рейтингов Кронос до B.ru и ЛКХ до B.ru) не отразилась в спредах первого эшелона: средний G-спред AAA снизился до 69 б.п. против 118 б.п. неделей ранее, а 31.07 достиг минимума периода 49 б.п. Данные охватывают только сегмент AAA с дюрацией 2–3 года, поэтому по нижним эшелонам, где концентрируются дефолты, выводов из этих метрик сделать нельзя.</li><li>Пик оборота 30.07 (82,53 млрд руб., 123% от среднего) сформирован преимущественно корпоративным сегментом (29,52 млрд руб.), в значительной мере — торгами по РЖД, 001P-05R (8,08 млрд руб., 27% корпоративного оборота дня, при 278 сделках за период по бумаге в целом, то есть крупными лотами). Тот же день дал аномальную концентрацию в бакете 0–1 год (50% корпоративного оборота дня) и резкий скачок доли фиксированного купона в корпоративных бумагах (с 62% 29.07 до 89%). Аналогично 31.07 лидером стал ГТЛК, 002P-13 (6,05 млрд руб., 29% корпоративного оборота дня), а бакет 3–5 лет занял 44% корпоративного оборота дня.</li><li>Сокращение корпоративного оборота на 32,3% к предыдущей неделе и падение доли флоатеров в нём с 52,2% до 20,8% — самые крупные структурные сдвиги периода. Подтверждающих событий, объясняющих именно это перераспределение, в данных нет; отмечаем как факт структурной перестройки корпоративного оборота.</li></ol></div>
+  </div>
+</details>
+
+<footer>
+  <div>Автоматическая система анализа (GigaChat 2 Max + Claude Opus 5 + Kimi k3). Возможны ошибки.<br>Не является инвестиционной рекомендацией.</div>
+  <div class="r">curioai · t.me/curioai</div>
+</footer>
+
+</div>
+
+<script>
+const D = {"dates": ["27.07", "28.07", "29.07", "30.07", "31.07"], "dows": ["пн", "вт", "ср", "чт", "пт"], "ofz": [44.37, 49.21, 49.21, 53.02, 45.7], "corp": [16.25, 14.4, 12.42, 29.52, 20.86], "tenors": ["4M", "6M", "9M", "1Y", "2Y", "3Y", "4Y", "5Y", "7Y", "8Y", "9Y", "10Y", "15Y"], "days": [120, 180, 270, 365, 730, 1095, 1460, 1825, 2555, 2920, 3285, 3650, 5475], "curve": [[13.506, 13.468, 13.575, 13.782, 14.642, 15.068, 15.307, 15.486, 15.713, 15.785, 15.842, 15.887, 16.02], [13.484, 13.556, 13.733, 13.941, 14.647, 15.037, 15.279, 15.462, 15.697, 15.767, 15.819, 15.858, 15.948], [13.427, 13.313, 13.372, 13.573, 14.527, 15.005, 15.24, 15.385, 15.556, 15.621, 15.675, 15.721, 15.871], [13.537, 13.393, 13.429, 13.623, 14.598, 15.076, 15.288, 15.4, 15.525, 15.581, 15.632, 15.676, 15.835], [13.46, 13.346, 13.42, 13.632, 14.583, 15.057, 15.284, 15.422, 15.568, 15.617, 15.658, 15.692, 15.837]], "slope": [124.5, 121.1, 119.4, 107.8, 110.9], "gspread": [60.8, 78.7, 84.6, 73.2, 49.3], "margin": [131.9, 126.7, 143.8, 147.5, 134.5], "top": [["ГТЛК, 002P-13", 9.41, 10.07, 10540], ["РЖД, 001P-05R", 9.09, 9.72, 278], ["Группа компаний Самолет, БО-П18", 3.67, 3.93, 10053], ["СФО СБ Секьюритизация 5, АС", 2.97, 3.18, 3034], ["РусГидро, БО-002Р-07", 2.97, 3.17, 3236], ["РЕСО-Лизинг, БО-П-23", 2.45, 2.62, 1637]], "dayLead": [["27.07", "Группа компаний Самолет, БО-П18", 2.55, 15.7], ["28.07", "РусГидро, БО-002Р-07", 1.44, 10.0], ["29.07", "МТС, 002Р-05", 1.09, 8.8], ["30.07", "РЖД, 001P-05R", 8.08, 27.4], ["31.07", "ГТЛК, 002P-13", 6.05, 29.0]], "rateOfz": {"Фиксированная": 91.4, "Плавающая": 8.6}, "rateCorp": {"Фиксированная": 79.2, "Плавающая": 20.8}, "termOfz": {"0-1 год": 2.2, "1-3 года": 6.1, "3-5 лет": 6.0, "5-10 лет": 32.9, "более 10 лет": 52.8}, "termCorp": {"0-1 год": 30.6, "1-3 года": 41.9, "3-5 лет": 21.8, "5-10 лет": 5.5, "более 10 лет": 0.3}};
+
+const NS='http://www.w3.org/2000/svg';
+const ru=(v,d=2)=>Number(v).toLocaleString('ru-RU',{minimumFractionDigits:d,maximumFractionDigits:d});
+const C={acc:'#2ECDA7',neg:'#FF7B7B',mut:'#8A93B0',gray:'#6B7899',bar:'#5A6894'};
+function svg(w,h){const s=document.createElementNS(NS,'svg');s.setAttribute('viewBox',`0 0 ${w} ${h}`);
+  s.setAttribute('preserveAspectRatio','xMidYMid meet');return s}
+function el(p,t,a={},txt){const e=document.createElementNS(NS,t);for(const k in a)e.setAttribute(k,a[k]);
+  if(txt!=null)e.textContent=txt;p.appendChild(e);return e}
+function path(p,pts,stroke,w=2,extra={}){const d=pts.map((q,i)=>(i?'L':'M')+q[0].toFixed(1)+' '+q[1].toFixed(1)).join(' ');
+  return el(p,'path',Object.assign({d,fill:'none',stroke,'stroke-width':w,'stroke-linejoin':'round','stroke-linecap':'round'},extra))}
+const $=id=>document.getElementById(id);
+
+/* кривая + изменение по точкам */
+if(D.curve && D.curve.length && $('curveChart')){
+  const W=1000,Hc=248,Hd=104,gap=32,PL=54,PR=16,PT=14,H=PT+Hc+gap+Hd+34;
+  const s=svg(W,H),xs=D.days.map(d=>Math.sqrt(d)),x0=Math.min(...xs),x1=Math.max(...xs);
+  const X=v=>PL+(Math.sqrt(v)-x0)/(x1-x0)*(W-PL-PR);
+  const a=D.curve[0],b=D.curve[D.curve.length-1];
+  const all=D.curve.flat(),lo=Math.floor(Math.min(...all)*2)/2-.3,hi=Math.ceil(Math.max(...all)*2)/2+.3;
+  const Y=v=>PT+Hc-(v-lo)/(hi-lo)*Hc;
+  for(let v=Math.ceil(lo*2)/2;v<=hi;v+=0.5){
+    el(s,'line',{x1:PL,x2:W-PR,y1:Y(v),y2:Y(v),class:'grid'});
+    el(s,'text',{x:PL-9,y:Y(v)+4,class:'axlab','text-anchor':'end'},ru(v,1));}
+  const band=[...D.days.map((d,i)=>[X(d),Y(a[i])]),...D.days.map((d,i)=>[X(d),Y(b[i])]).reverse()];
+  el(s,'path',{d:band.map((q,i)=>(i?'L':'M')+q[0].toFixed(1)+' '+q[1].toFixed(1)).join(' ')+' Z',
+    fill:'rgba(46,205,167,.13)',stroke:'none'});
+  D.curve.slice(1,-1).forEach(r=>path(s,D.days.map((d,i)=>[X(d),Y(r[i])]),'#4A5680',1,{opacity:.5,'stroke-dasharray':'3 3'}));
+  path(s,D.days.map((d,i)=>[X(d),Y(a[i])]),C.gray,2.2);
+  path(s,D.days.map((d,i)=>[X(d),Y(b[i])]),C.acc,3);
+  D.days.forEach((d,i)=>{el(s,'circle',{cx:X(d),cy:Y(a[i]),r:3,fill:C.gray});
+    el(s,'circle',{cx:X(d),cy:Y(b[i]),r:3.6,fill:C.acc})});
+  const dy=PT+Hc+gap,deltas=D.days.map((d,i)=>(b[i]-a[i])*100),dmax=Math.max(...deltas.map(Math.abs))||1;
+  el(s,'line',{x1:PL,x2:W-PR,y1:dy,y2:dy,class:'ax'});
+  el(s,'text',{x:W-PR,y:dy-8,class:'axlab','text-anchor':'end',fill:C.mut},'изменение за период, б.п.');
+  const bw=(W-PL-PR)/D.days.length*0.46;
+  deltas.forEach((v,i)=>{const h=Math.abs(v)/dmax*(Hd-16);
+    el(s,'rect',{x:X(D.days[i])-bw/2,y:v<0?dy:dy-h,width:bw,height:h,rx:2,fill:v<0?C.acc:C.neg,opacity:.9});
+    el(s,'text',{x:X(D.days[i]),y:dy+h+13,class:'axlab','text-anchor':'middle',fill:'#8E9AB8'},ru(v,0))});
+  D.tenors.forEach((t,i)=>el(s,'text',{x:X(D.days[i]),y:H-6,class:'axlab t','text-anchor':'middle'},t));
+  $('curveChart').appendChild(s);
+}
+
+/* наклон по дням */
+if(D.slope && D.slope.length && $('slopeChart')){
+  const W=460,H=190,PL=44,PR=14,PT=16,PB=30,s=svg(W,H);
+  const lo=Math.min(...D.slope)-15,hi=Math.max(...D.slope)+15;
+  const X=i=>PL+i*(W-PL-PR)/Math.max(D.slope.length-1,1),Y=v=>PT+(H-PT-PB)-(v-lo)/(hi-lo)*(H-PT-PB);
+  el(s,'line',{x1:PL,x2:W-PR,y1:Y(lo),y2:Y(lo),class:'ax'});
+  const pts=D.slope.map((v,i)=>[X(i),Y(v)]);
+  path(s,pts,C.acc,2.6);
+  D.slope.forEach((v,i)=>{el(s,'circle',{cx:X(i),cy:Y(v),r:4,fill:C.acc});
+    el(s,'text',{x:X(i),y:Y(v)-12,class:'axlab','text-anchor':'middle',fill:'#fff','font-weight':'700'},ru(v,0));
+    el(s,'text',{x:X(i),y:H-8,class:'axlab t','text-anchor':'middle'},(D.dates[i]||''))});
+  el(s,'text',{x:PL-8,y:PT-3,class:'axlab','text-anchor':'end',fill:C.mut},'б.п.');
+  $('slopeChart').appendChild(s);
+}
+
+/* таблица кривой */
+if(D.curve && D.curve.length && $('curveTable')){
+  const tb=$('curveTable'),a=D.curve[0],b=D.curve[D.curve.length-1];
+  D.tenors.forEach((t,i)=>{const d=(b[i]-a[i])*100;
+    tb.insertAdjacentHTML('beforeend',`<tr><td class="em num">${t}</td>
+      <td class="r num" style="color:#8A93B0">${ru(a[i],3)}</td><td class="r num em">${ru(b[i],3)}</td>
+      <td class="r num" style="color:${d<0?'#2ECDA7':'#FF7B7B'}">${ru(d,1)}</td></tr>`)});
+}
+
+/* спреды */
+if(((D.gspread&&D.gspread.length)||(D.margin&&D.margin.length)) && $('spreadChart')){
+  const W=620,H=250,PL=44,PR=16,PT=18,PB=32,s=svg(W,H);
+  const all=[...(D.gspread||[]),...(D.margin||[])];
+  const lo=Math.min(...all)-10,hi=Math.max(...all)+10,n=Math.max((D.gspread||D.margin).length-1,1);
+  const X=i=>PL+i*(W-PL-PR)/n,Y=v=>PT+(H-PT-PB)-(v-lo)/(hi-lo)*(H-PT-PB);
+  [[D.gspread,C.neg],[D.margin,C.acc]].forEach(([arr,col])=>{
+    if(!arr||!arr.length)return;
+    path(s,arr.map((v,i)=>[X(i),Y(v)]),col,2.6);
+    arr.forEach((v,i)=>{el(s,'circle',{cx:X(i),cy:Y(v),r:4,fill:col});
+      el(s,'text',{x:X(i),y:Y(v)-12,class:'axlab','text-anchor':'middle',fill:col,'font-weight':'700'},ru(v,0))})});
+  (D.dates||[]).forEach((d,i)=>el(s,'text',{x:X(i),y:H-10,class:'axlab t','text-anchor':'middle'},d+' '+(D.dows[i]||'')));
+  el(s,'text',{x:PL-8,y:PT-4,class:'axlab','text-anchor':'end',fill:C.mut},'б.п.');
+  $('spreadChart').appendChild(s);
+}
+
+/* обороты по дням */
+if(D.dates && D.dates.length && $('turnChart')){
+  const W=620,H=250,PL=48,PR=16,PT=22,PB=34,s=svg(W,H),n=D.dates.length;
+  const tot=D.ofz.map((o,i)=>o+D.corp[i]),hi=Math.max(...tot)*1.15;
+  const X=i=>PL+i*(W-PL-PR)/n+((W-PL-PR)/n)*0.5,bw=(W-PL-PR)/n*0.52;
+  const Y=v=>PT+(H-PT-PB)-v/hi*(H-PT-PB);
+  const avg=tot.reduce((a,b)=>a+b,0)/n;
+  for(let k=0;k<=4;k++){const v=hi/4*k;
+    el(s,'line',{x1:PL,x2:W-PR,y1:Y(v),y2:Y(v),class:'grid'});
+    el(s,'text',{x:PL-8,y:Y(v)+4,class:'axlab','text-anchor':'end'},ru(v,0))}
+  el(s,'line',{x1:PL,x2:W-PR,y1:Y(avg),y2:Y(avg),stroke:'#fff','stroke-width':1,'stroke-dasharray':'5 4',opacity:.45});
+  el(s,'text',{x:W-PR,y:Y(avg)-6,class:'axlab','text-anchor':'end',fill:'#C6CCE0'},'среднее '+ru(avg,1));
+  D.ofz.forEach((o,i)=>{const c=D.corp[i];
+    el(s,'rect',{x:X(i)-bw/2,y:Y(o),width:bw,height:Y(0)-Y(o),fill:C.acc,rx:2});
+    el(s,'rect',{x:X(i)-bw/2,y:Y(o+c),width:bw,height:Y(0)-Y(c),fill:C.bar,rx:2});
+    el(s,'text',{x:X(i),y:Y(o+c)-9,class:'axlab','text-anchor':'middle',fill:'#fff','font-weight':'700'},ru(o+c,1));
+    el(s,'text',{x:X(i),y:H-12,class:'axlab t','text-anchor':'middle'},D.dates[i]);
+    el(s,'text',{x:X(i),y:H-2,class:'axlab','text-anchor':'middle',fill:'#6E7896'},D.dows[i]||'')});
+  el(s,'text',{x:PL-8,y:PT-6,class:'axlab','text-anchor':'end',fill:C.mut},'млрд ₽');
+  $('turnChart').appendChild(s);
+}
+
+/* структура по типу ставки */
+if($('rateTypeChart')){
+  const box=$('rateTypeChart');
+  [['ОФЗ',D.rateOfz],['Корпоративные',D.rateCorp]].forEach(([name,obj])=>{
+    if(!obj||!Object.keys(obj).length)return;
+    const fx=obj['Фиксированная']||0,fl=obj['Плавающая']||0;
+    box.insertAdjacentHTML('beforeend',`
+      <div style="margin-bottom:20px">
+        <div style="display:flex;justify-content:space-between;align-items:baseline;margin-bottom:8px">
+          <span style="font-weight:700;color:#fff;font-size:14px">${name}</span>
+          <span class="num" style="font-size:12px;color:#8A93B0">фикс ${ru(fx,1)}% · флоатеры ${ru(fl,1)}%</span></div>
+        <div style="display:flex;height:25px;border-radius:5px;overflow:hidden;background:#26325A">
+          <div style="width:${fx}%;background:#5A6894;display:flex;align-items:center;padding-left:9px">
+            <span class="num" style="font-size:11.5px;font-weight:700;color:#E4E8F4">${ru(fx,1)}%</span></div>
+          <div style="width:${fl}%;background:#2ECDA7;display:flex;align-items:center;justify-content:center">
+            ${fl>=12?`<span class="num" style="font-size:11.5px;font-weight:700;color:#0E1530">${ru(fl,1)}%</span>`:''}
+          </div></div></div>`)});
+}
+
+/* структура по срокам */
+if($('termChart') && D.termOfz && Object.keys(D.termOfz).length){
+  const buckets=['0-1 год','1-3 года','3-5 лет','5-10 лет','более 10 лет'];
+  const W=1000,H=210,PL=100,PR=20,PT=26,PB=28,s=svg(W,H),gw=(W-PL-PR)/buckets.length;
+  const vals=buckets.flatMap(b=>[D.termOfz[b]||0,D.termCorp[b]||0]);
+  const hi=Math.max(...vals)*1.2||100;
+  const Y=v=>PT+(H-PT-PB)-v/hi*(H-PT-PB);
+  for(let k=0;k<=3;k++){const v=hi/3*k;
+    el(s,'line',{x1:PL,x2:W-PR,y1:Y(v),y2:Y(v),class:'grid'});
+    el(s,'text',{x:PL-10,y:Y(v)+4,class:'axlab','text-anchor':'end'},ru(v,0)+'%')}
+  buckets.forEach((b,i)=>{const cx=PL+gw*i+gw/2,bw=gw*0.3;
+    const o=D.termOfz[b]||0,c=D.termCorp[b]||0;
+    el(s,'rect',{x:cx-bw-3,y:Y(o),width:bw,height:Y(0)-Y(o),fill:C.acc,rx:2});
+    el(s,'rect',{x:cx+3,y:Y(c),width:bw,height:Y(0)-Y(c),fill:C.bar,rx:2});
+    el(s,'text',{x:cx-bw/2-3,y:Y(o)-7,class:'axlab','text-anchor':'middle',fill:C.acc,'font-weight':'700'},ru(o,1));
+    el(s,'text',{x:cx+bw/2+3,y:Y(c)-7,class:'axlab','text-anchor':'middle',fill:'#A9B2CC','font-weight':'700'},ru(c,1));
+    el(s,'text',{x:cx,y:H-8,class:'axlab t','text-anchor':'middle'},b)});
+  el(s,'rect',{x:PL,y:2,width:14,height:9,fill:C.acc,rx:2});
+  el(s,'text',{x:PL+20,y:11,class:'axlab',fill:'#E4E8F4'},'ОФЗ');
+  el(s,'rect',{x:PL+70,y:2,width:14,height:9,fill:C.bar,rx:2});
+  el(s,'text',{x:PL+90,y:11,class:'axlab',fill:'#E4E8F4'},'Корпоративные');
+  $('termChart').appendChild(s);
+}
+
+/* таблицы топа */
+if(D.top && D.top.length && $('topTable')){
+  const max=Math.max(...D.top.map(r=>r[1]));
+  D.top.forEach(([n,v,sh,tr])=>$('topTable').insertAdjacentHTML('beforeend',
+    `<tr><td class="em">${n}<div style="height:3px;border-radius:2px;background:#2ECDA7;opacity:.55;width:${v/max*100}%;margin-top:6px"></div></td>
+     <td class="r num">${ru(v,2)}</td><td class="r num" style="color:#8A93B0">${sh!=null?ru(sh,1)+'%':'—'}</td>
+     <td class="r num" style="color:${tr&&tr>2000?'#2ECDA7':'#8A93B0'}">${tr!=null?Number(tr).toLocaleString('ru-RU'):'—'}</td></tr>`));
+}
+if(D.dayLead && D.dayLead.length && $('dayTable')){
+  D.dayLead.forEach(([d,n,v,sh])=>$('dayTable').insertAdjacentHTML('beforeend',
+    `<tr><td class="num" style="color:#2ECDA7;font-weight:700">${d}</td><td class="em">${n}</td>
+     <td class="r num">${ru(v,2)}</td>
+     <td class="r num" style="color:${sh>=30?'#FF7B7B':'#8A93B0'};font-weight:${sh>=30?'700':'400'}">${sh!=null?ru(sh,1)+'%':'—'}</td></tr>`));
+}
+
+/* разворачивание секций */
+(function(){
+  const secs=[...document.querySelectorAll('details.sec')];
+  const btn=$('btnAll');
+  if(!btn||!secs.length)return;
+  const sync=()=>{btn.textContent=secs.every(s=>s.open)?'Свернуть всё':'Развернуть всё'};
+  btn.addEventListener('click',()=>{const allOpen=secs.every(s=>s.open);
+    secs.forEach(s=>s.open=!allOpen);sync()});
+  secs.forEach(s=>s.addEventListener('toggle',()=>{
+    sync();
+    if(s.open&&history.replaceState) history.replaceState(null,'','#'+s.id);
+  }));
+  const h=location.hash.slice(1);
+  if(h){const t=$(h);
+    if(t&&t.classList.contains('sec')){secs.forEach(x=>x.open=(x===t));
+      setTimeout(()=>t.scrollIntoView({block:'start'}),60)}}
+  sync();
+  $('btnPrint').addEventListener('click',()=>{
+    secs.forEach(s=>s.open=true);sync();setTimeout(()=>window.print(),120)});
+})();
+
+</script>
+</body>
+</html>
