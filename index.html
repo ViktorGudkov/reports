@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Рынок облигаций РФ · 02.11.2026 — 08.11.2026</title>
+<title>Рынок облигаций РФ · 09.11.2026 — 15.11.2026</title>
 <style>
 
   :root{
@@ -146,48 +146,153 @@
     h1,.stitle,.btitle,td.em{color:#111}
   }
 
+
+  /* Paragraphs and lists in the final report summary. */
+  #summary .prose > * + *{margin-top:12px}
+  #summary .prose ul{padding-left:22px;list-style:disc}
+  #summary .prose li + li{margin-top:7px}
+  #summary .prose a{color:var(--accent);text-decoration:underline;text-underline-offset:2px;overflow-wrap:anywhere}
+  #summary .prose a:focus-visible{outline:2px solid var(--accent);outline-offset:3px}
+
 </style>
-</head>
+<style id="reviewed-dashboard-layout">
+  /* Reviewed dashboard layout: prose, narrow screens and printing. */
+  .block,.cols2>*{min-width:0}
+  .prose > * + *{margin-top:12px}
+  .prose ul{padding-left:22px;list-style:disc}
+  .prose li + li{margin-top:7px}
+  .prose h3{font-size:15px;line-height:1.5;color:var(--text-hi);margin-top:22px}
+  .prose h3:first-child{margin-top:0}
+  .prose a,.evb a{color:var(--accent);text-decoration:underline;text-underline-offset:2px;overflow-wrap:anywhere}
+  .prose a:focus-visible,.evb a:focus-visible{outline:2px solid var(--accent);outline-offset:3px}
+  .ev .evb .prose{font-size:inherit;line-height:inherit}
+  .ev summary>span:last-of-type{min-width:0;overflow-wrap:anywhere}
+  .table-scroll,.chart-scroll{max-width:100%;overflow-x:auto;overscroll-behavior-x:contain;
+    scrollbar-color:var(--accent-dim) var(--surface2);scrollbar-width:thin;padding-bottom:8px}
+  .table-scroll:focus-visible,.chart-scroll:focus-visible{outline:2px solid var(--accent);outline-offset:3px}
+  .scroll-hint{font-size:12px;color:var(--muted);margin:7px 0 10px}
+  .scroll-hint[hidden]{display:none}
+  .chart-scroll svg{max-width:none}
+  .axlab,.axlab.t{font-size:12.5px}
+  #prim table{min-width:900px;table-layout:fixed}
+  #prim th:nth-child(1){width:23%}
+  #prim th:nth-child(2){width:12%}
+  #prim th:nth-child(3){width:21%}
+  #prim th:nth-child(4){width:18%}
+  #prim th:nth-child(5){width:26%}
+  #prim td{overflow-wrap:anywhere}
+  #top table{min-width:440px}
+  #curve table{min-width:300px}
+  #rateTypeChart>div>div:first-child{flex-wrap:wrap;gap:5px 12px}
+  @media(max-width:840px){.cols2{grid-template-columns:minmax(0,1fr)}}
+  @media(max-width:600px){
+    .wrap{padding:0 14px}
+    .sec>summary{padding:15px 12px;gap:11px}
+    .sbody{padding:2px 12px 16px}
+    .block{padding:16px 14px}
+    #events .block{padding:2px 14px!important}
+    .ev summary{display:grid;grid-template-columns:minmax(0,1fr) 24px;gap:7px 10px}
+    .evdate{width:auto;grid-column:1;grid-row:1}
+    .ev summary>span:last-of-type{grid-column:1;grid-row:2}
+    .ev summary::after{grid-column:2;grid-row:1 / span 2;align-self:start;margin:0;padding:2px 0 0;text-align:center}
+  }
+  @media print{
+    :root{--text:#111;--text-hi:#111;--muted:#48516b;--accent:#12644e}
+    .ev summary,.evb,.prose,.prose h3,.sdigest,.legend{color:#111!important}
+    .scroll-hint{display:none!important}
+    .table-scroll,.chart-scroll{overflow:visible!important;max-width:100%;padding:0}
+    .table-scroll table{min-width:0!important;table-layout:fixed;width:100%;font-size:10px}
+    .table-scroll th,.table-scroll td{padding:5px!important;white-space:normal;overflow-wrap:anywhere;color:#111!important}
+    .chart-scroll svg{width:100%!important;min-width:0!important;max-width:100%!important}
+    .table-scroll .num,.table-scroll .em,.table-scroll span{color:#111!important}
+    .ev summary{break-after:avoid}
+    thead{display:table-header-group}tr{break-inside:avoid}
+    a{color:#12644e!important}
+  }
+</style></head>
 <body>
 <div class="wrap">
 
 <header>
   <div class="eyebrow">
     <div class="brand">Еженедельный обзор · @curioai</div>
-    <div class="genmeta">Сформирован 08.11.2026 07:29 · обработано 708 событий</div>
+    <div class="genmeta">Сформирован 15.11.2026 17:06 · обработано 1033 событий</div>
   </div>
   <h1>Рынок облигаций РФ</h1>
-  <div class="period">02.11.2026 — 08.11.2026</div>
+  <div class="period">09.11.2026 — 15.11.2026</div>
 </header>
 
 <div class="tiles">
-  <div class="tile warn">
+  <div class="tile">
     <div class="lab">Доходность ОФЗ 2Y</div>
-    <div class="val num">14,99<span class="u">%</span></div>
-    <div class="dlt neg num">0,4 б.п.</div>
+    <div class="val num">14,85<span class="u">%</span></div>
+    <div class="dlt num">-11,3 б.п.</div>
   </div>
   <div class="tile warn">
     <div class="lab">Наклон ОФЗ 10Y − 2Y</div>
-    <div class="val num">177<span class="u">б.п.</span></div>
+    <div class="val num">190<span class="u">б.п.</span></div>
     <div class="dlt neg num">21 б.п.</div>
   </div>
   <div class="tile warn">
     <div class="lab">G-спред AAA, 2–3Y</div>
-    <div class="val num">73<span class="u">б.п.</span></div>
-    <div class="dlt neg num">+19 б.п.</div>
+    <div class="val num">86<span class="u">б.п.</span></div>
+    <div class="dlt neg num">+10 б.п.</div>
   </div>
   <div class="tile">
     <div class="lab">Маржа AAA-флоатеров</div>
-    <div class="val num">138<span class="u">б.п.</span></div>
-    <div class="dlt num">-10 б.п.</div>
+    <div class="val num">140<span class="u">б.п.</span></div>
+    <div class="dlt num">-2 б.п.</div>
   </div>
   <div class="tile">
     <div class="lab">Среднедневной оборот</div>
-    <div class="val num">30,6<span class="u">млрд ₽</span></div>
+    <div class="val num">30,9<span class="u">млрд ₽</span></div>
     
   </div>
 </div>
 
+<details class="sec" id="summary" open>
+  <summary>
+    <span class="sno">00</span>
+    <span class="shead">
+      <span class="stitle">Резюме</span>
+      <span class="sdigest">Окончательная редакция от 15.11.2026. Срез новостей: 15.11.2026 06:23:05 МСК; торговые данные: 9–13.11.2026.</span>
+    </span>
+    <span class="chev">+</span>
+  </summary>
+  <div class="sbody">
+<div class="block"><div class="prose"><p>Окончательная редакция от 15.11.2026. Срез новостей: 15.11.2026 06:23:05 МСК; торговые данные: 9–13.11.2026.</p>
+<p>В период 09–15.11.2026 ключевая ставка Банка России не менялась: 14,00% годовых, действует с 27 июля 2026 г. На заседании 23 октября она была сохранена, следующее заседание назначено на 18 декабря. Главным событием недели стали выступления председателя Банка России Эльвиры Набиуллиной в Госдуме.</p>
+<p>09.11, на совместном заседании комитетов, она сообщила: «В сентябре и октябре мы действительно даже не рассматривали снижение ставки, только сохранение». Набиуллина заявила о недопустимости спешки со снижением ставки. По её словам, в базовом сценарии ставка снижается, но остаётся двузначной в течение всего следующего года, а пространство для снижения появится по мере восстановления пострадавших от атак мощностей, «но не ранее этого». 12.11, представляя ОНДКП на 2027–2029 гг., она сказала: «Ключевая ставка высокая уже три года и останется высокой еще какое-то время».</p>
+<p>Макроданные недели:</p>
+<ul>
+<li>11.11 опубликованы данные о ценах: за 3–9 ноября они выросли на 0,12% после снижения на 0,04% неделей ранее. Годовая инфляция на 9 ноября — 6,98% по оценке Минэкономразвития.</li>
+<li>Банк России оценил годовую инфляцию в октябре вблизи 7%.</li>
+<li>По предварительной оценке Минфина (10.11), дефицит федерального бюджета за январь–октябрь составил 5,234 трлн руб. (2,3% ВВП).</li>
+</ul>
+<p>Оборот рублёвых облигаций в режиме основных торгов составил 154,39 млрд руб., среднедневной — 30,88 млрд руб. К предыдущей неделе в расчёте на торговый день:</p>
+<ul>
+<li>весь рублёвый оборот: +0,8%;</li>
+<li>ОФЗ: +18,0%;</li>
+<li>корпоративные облигации: −17,2%.</li>
+</ul>
+<p>Кривая ОФЗ стала круче. Доходности 1–3 лет снизились (2Y −11,3 б.п.), длинный конец вырос (10Y +9,8 б.п.), наклон 10Y−1Y увеличился на 18 б.п. Средневзвешенный G-спред AAA составил в среднем 80 б.п. против 54 б.п. неделей ранее; на переоценку сопоставимых бумаг пришлось +13,1 б.п. Скорр. маржа AAA флоатеров — 141 б.п., её переоценки к прошлой неделе не было.</p>
+<p>На аукционах Минфина 11.11 размещено 65,69 млрд руб. по номиналу (выручка 51,12 млрд руб.). С учётом доразмещения ОФЗ 26250 — 88,87 млрд руб. по номиналу (выручка 70,58 млрд руб.). Спрос на аукционах — 134,7 млрд руб.; в публикациях он охарактеризован как более слабый, чем в предыдущие недели.</p>
+<p>Кредитные события:</p>
+<ul>
+<li>По <a href="https://frankmedia.ru/315681" target="_blank" rel="noopener noreferrer">сводке Frank Media от 14.11.2026</a>, за 9–13 ноября на российском рынке облигаций зафиксировано 33 случая дефолта. Показатель относится к случаям неисполнения, а не к числу разных эмитентов, и приводится без независимого пересчёта реестра. В сводке новыми эмитентами, допустившими технический дефолт, названы «СибСульфур», «Агро-Фрегат» и «Урожай».</li>
+<li>ГК «Самолет» 09.11 не исполнила в установленную дату оферту по БО-П05 (компания сослалась на техническую причину на стороне банка) и выкупила облигации 11.11.</li>
+<li>ПАО «МГКЛ» 11.11 допустило пятый техдефолт по купону.</li>
+<li>АКРА понизило рейтинг «Балтийского лизинга» до A(RU).</li>
+</ul>
+<p>На первичном рынке закрыто 11 книг заявок, ещё 5 выпусков размещены без публично объявленной книги. Среди закрытых книг:</p>
+<ul>
+<li>«ИКС 5 ФИНАНС» — 22 млрд руб., КС+130 б.п.;</li>
+<li>«Газпром капитал» — КС+150 б.п.;</li>
+<li>Нижегородская область — 20 млрд руб., КС+200 б.п.</li>
+</ul>
+<p>Вероятностная модель на 13.11 оценивает вероятность удержания ставки 18.12 в 70%. Ставки денежного рынка и свопы за неделю слегка сместились к смягчению, хотя новостной фон был ястребиным.</p></div></div>
+  </div>
+</details>
 <div class="toolbar">
   <span class="cap">Разделы отчёта</span>
   <button class="tb" id="btnAll">Развернуть всё</button>
@@ -199,7 +304,7 @@
     <span class="sno">01</span>
     <span class="shead">
       <span class="stitle">Кривая доходности ОФЗ</span>
-      <span class="sdigest">Средний сдвиг за период — <b>9 б.п.</b></span>
+      <span class="sdigest">Средний сдвиг за период — <b>1 б.п.</b></span>
     </span>
     <span class="chev">+</span>
   </summary>
@@ -207,13 +312,13 @@
     <div class="block">
       <div class="btitle">Сдвиг кривой за период</div>
       <div class="bsub">Верхний график — кривая на начало и конец периода, нижний — изменение по каждой точке.</div>
-      <div id="curveChart"></div>
+      <p class="scroll-hint" id="curveChart-hint" hidden="hidden">График можно прокрутить по горизонтали →</p><div id="curveChart" class="chart-scroll" tabindex="0" role="region" aria-label="Сдвиг кривой за период — график" aria-describedby="curveChart-hint"></div>
     </div>
     <div class="cols2 mt10">
-      <div class="block"><div class="btitle">Наклон 10Y − 2Y по дням</div><div id="slopeChart"></div></div>
+      <div class="block"><div class="btitle">Наклон 10Y − 2Y по дням</div><p class="scroll-hint" id="slopeChart-hint" hidden="hidden">График можно прокрутить по горизонтали →</p><div id="slopeChart" class="chart-scroll" tabindex="0" role="region" aria-label="Наклон 10Y − 2Y по дням — график" aria-describedby="slopeChart-hint"></div></div>
       <div class="block"><div class="btitle">Все точки кривой</div>
-        <table><thead><tr><th>Срок</th><th class="r">начало</th><th class="r">конец</th><th class="r">Δ, б.п.</th></tr></thead>
-        <tbody id="curveTable"></tbody></table></div>
+        <p class="scroll-hint" id="table-hint-0" hidden="hidden">Таблицу можно прокрутить по горизонтали →</p><div class="table-scroll" tabindex="0" role="region" aria-label="Кривая доходности ОФЗ — таблица" aria-describedby="table-hint-0"><table><thead><tr><th>Срок</th><th class="r">начало</th><th class="r">конец</th><th class="r">Δ, б.п.</th></tr></thead>
+        <tbody id="curveTable"></tbody></table></div></div>
     </div>
   </div>
 </details>
@@ -234,7 +339,7 @@
         <div><span class="swatch" style="background:var(--neg)"></span>G-спред AAA (фикс)</div>
         <div><span class="swatch" style="background:var(--accent)"></span>Скорр. маржа флоатеров</div>
       </div>
-      <div id="spreadChart"></div>
+      <p class="scroll-hint" id="spreadChart-hint" hidden="hidden">График можно прокрутить по горизонтали →</p><div id="spreadChart" class="chart-scroll" tabindex="0" role="region" aria-label="G-спред фиксов и маржа флоатеров по дням — график" aria-describedby="spreadChart-hint"></div>
     </div>
   </div>
 </details>
@@ -244,7 +349,7 @@
     <span class="sno">03</span>
     <span class="shead">
       <span class="stitle">Торговые обороты</span>
-      <span class="sdigest"><b>122,5 млрд ₽</b> за 4 дней</span>
+      <span class="sdigest"><b>154,4 млрд ₽</b> за 5 дней</span>
     </span>
     <span class="chev">+</span>
   </summary>
@@ -253,12 +358,12 @@
       <div class="btitle">Оборот по дням</div>
       <div class="legend"><div><span class="swatch" style="background:var(--accent)"></span>ОФЗ</div>
       <div><span class="swatch" style="background:#5A6894"></span>Корпоративные</div></div>
-      <div id="turnChart"></div>
+      <p class="scroll-hint" id="turnChart-hint" hidden="hidden">График можно прокрутить по горизонтали →</p><div id="turnChart" class="chart-scroll" tabindex="0" role="region" aria-label="Оборот по дням — график" aria-describedby="turnChart-hint"></div>
     </div>
     <div class="block mt10"><div class="btitle">Структура по типу ставки</div>
       <div id="rateTypeChart"></div></div>
     <div class="block mt10"><div class="btitle">Структура по срокам до погашения</div>
-      <div id="termChart"></div></div>
+      <p class="scroll-hint" id="termChart-hint" hidden="hidden">График можно прокрутить по горизонтали →</p><div id="termChart" class="chart-scroll" tabindex="0" role="region" aria-label="Структура по срокам до погашения — график" aria-describedby="termChart-hint"></div></div>
   </div>
 </details>
 
@@ -272,7 +377,45 @@
     <span class="chev">+</span>
   </summary>
   <div class="sbody">
-    <div class="block"><div class="prose">Вывод простыми словами: за неделю рынок слегка снизил ожидаемую ставку на ближайшие полгода, но повысил ожидания на горизонте 2–6 лет. И рыночные индикаторы, и вероятностная модель по-прежнему указывают на сохранение ставки 14% на заседании 18.12; расхождения между моделью и рынком по направлению нет.<br><br>(а) Вероятностная оценка решения ЦБ<br><br>Это статистическая модель (логистическая регрессия) всего на двух признаках:<br>- спред ставки денежного рынка RUSFAR 3M к ключевой ставке — главный рыночный предиктор решения ЦБ;<br>- направление прошлого решения Банка России — удержание 23.10.<br><br>По построению модель продолжает прошлое направление, пока спред не укажет на другое. Прогноз по состоянию на 06.11, за 42 дня до заседания 18.12:<br>- удержание — 70%;<br>- снижение — 17%;<br>- повышение — 13%.<br><br>Наиболее вероятный шаг — 0 б.п. (70%), следующие по весу — снижение на 25 б.п. (8%) и повышение на 25 б.п. (5%).<br><br>Насколько доверять модели. Примерно за неделю до заседания и ближе простое пороговое правило по спреду работает не хуже модели. Пороговое правило — простая детерминированная модель: она относит сигнал к снижению, удержанию или повышению в зависимости от того, в какой диапазон попадает спред RUSFAR 3M к ключевой ставке. На более дальнем горизонте, как сейчас, модель точнее порогового правила, но не точнее простого повтора прошлого решения. Её ценность — в откалиброванных вероятностях, а не в угадывании разворотов.<br><br>(б) Рыночные индикаторы<br><br>RUSFAR 3M снизился с 14,09% до 14,05% (−4 б.п.). Его спред к ключевой ставке сузился с +0,09 до +0,05 п.п., то есть приблизился к нулю; снижение значения — сдвиг к смягчению. За последние 5 торговых дней RUSFAR снизился на 0,06 п.п.<br><br>Пороговое правило в начале и в конце периода давало сигнал «удержание», ориентир уровня ставки — 14,00%. Сигнал не менялся.<br><br>Свопы на ключевую ставку сдвинулись в диапазоне от −6,5 до +6 б.п.:<br>- короткий участок снизился: 3 мес. −5,5 б.п., 6 мес. −6,5 б.п., 9 мес. −2 б.п., 1 год −1 б.п.;<br>- сроки 2–7 лет выросли на 3–6 б.п.;<br>- 8–10 лет не изменились.<br><br>Средняя ключевая ставка, подразумеваемая свопами (уровень ожиданий):<br><br>| Горизонт | Средняя ставка | Изменение |<br>|---|---|---|<br>| 3 месяца | 13,90% | −5,5 б.п. |<br>| 6 месяцев | 13,85% | −6,3 б.п. |<br>| 1 год | 13,63% | −0,9 б.п. |<br><br>То есть рынок закладывает среднюю ставку на год вперёд немного ниже текущих 14%. По кварталам, отсчитанным от даты котировок, а не календарным:<br><br>| Квартал | Средняя ставка | Изменение |<br>|---|---|---|<br>| ближайшие 3 мес. | 13,90% | −5,5 б.п. |<br>| через 3–6 мес. | 13,79% | −7,1 б.п. |<br>| через 6–9 мес. | 13,56% | +6,9 б.п. |<br>| через 9–12 мес. | 13,26% | +2,0 б.п. |<br><br>Ожидания на ближайшее полугодие сместились к смягчению, на второе полугодие — к ужесточению. Отдельный квартал заметно чувствительнее к шуму котировок, чем средняя; изменения включают и сдвиг окна котировок. Сроки дальше года (средняя на 2 года 13,64%, на 3 года 13,88%, на 5 лет 14,34%; +3…+5 б.п.) — форвардные ставки с рыночной премией, а не прогноз решений ЦБ.<br><br>Кривая ОФЗ как контекст: средний сдвиг уровня +9 б.п., наклон 10Y−1Y +20 б.п. Это ястребиный сдвиг, сосредоточенный на длинных сроках.<br><br>(в) Новостной фон по ДКП<br><br>Ястребиных сигналов — 7 (средняя сила 0,66), голубиных — 5 (0,56), нейтральных — 2. Взвешенный по силе баланс — +1,80, перевес на стороне ужесточения; простой подсчёт даёт +2.<br><br>Внутри недели настроения сместились: в первой половине баланс был слегка голубиным (−0,30), во второй — ястребиным (+2,10), сдвиг +2,40. Ястребиные сигналы связаны с заявлениями ЦБ (2), бюджетом (2), рынком ОФЗ и потребительским спросом. Голубиные — главным образом с ростом экономики (4). По курсу рубля сигналы уравновешены (1 на 1); официальный курс доллара за неделю вырос на 1,96%.</div></div>
+    <div class="block"><div class="prose"><p>Коротко: за неделю рыночные ожидания по ставке лишь слегка сместились к смягчению. Ставка денежного рынка RUSFAR 3M снизилась на 3 б.п., средняя ключевая ставка на год вперёд, заложенная в свопах, — на 9 б.п. Вероятностная модель и пороговое правило по-прежнему указывают на удержание ставки 18 декабря, расхождения между моделью и рынком нет. Новостной фон при этом был ястребиным.</p>
+<h3>(а) Вероятностная оценка решения ЦБ.</h3>
+<p>Это статистическая модель (логистическая регрессия) всего на двух признаках:</p>
+<ul>
+<li>спред ставки денежного рынка RUSFAR 3M к ключевой ставке — главный рыночный предиктор решения ЦБ;</li>
+<li>направление прошлого решения Банка России (удержание).</li>
+</ul>
+<p>По построению модель продолжает прошлое направление, пока спред не укажет на другое. Её оценки по состоянию на 13.11, за 35 календарных дней до заседания 18.12:</p>
+<ul>
+<li>удержание — 70%;</li>
+<li>снижение — 18%;</li>
+<li>повышение — 13%.</li>
+</ul>
+<p>Наиболее вероятный шаг — 0 б.п. (70%), следующие по весу — снижение на 25 б.п. (9%) и повышение на 25 б.п. (5%).</p>
+<p>Как читать оценку: примерно за неделю до заседания и ближе простое пороговое правило по спреду работает не хуже модели. На горизонте около месяца и больше модель точнее порога, но не точнее простого повтора прошлого решения. Её ценность — в откалиброванных вероятностях, а не в угадывании разворотов.</p>
+<h3>(б) Рыночные индикаторы.</h3>
+<ul>
+<li>RUSFAR 3M: 14,06% → 14,03% (−3 б.п.). Положительный спред к ключевой ставке сузился с +6 до +3 б.п. — слабый сдвиг к смягчению. За 10 торговых дней RUSFAR снизился на 8 б.п.</li>
+<li>Пороговое правило: это простая детерминированная модель, которая относит сигнал к снижению, удержанию или повышению в зависимости от того, в какой диапазон попадает спред RUSFAR 3M к ключевой ставке. Сигнал — «удержание» и в начале, и в конце периода; ориентир уровня ставки — 14,00%.</li>
+<li>Свопы на ключевую ставку (IRS): котировки сдвинулись от −10 до +7 б.п., преимущественно вниз. Сильнее всего снизились 1 год и участок 6–9 лет (по −10 б.п.); котировка на 3 месяца выросла на 0,5 б.п., на 10 лет не изменилась, на 9 месяцев выросла на 7 б.п.</li>
+<li>Средняя ключевая ставка, подразумеваемая свопами (уровень ожиданий): на 3 месяца — около 13,90% (+0,5 б.п.; изменение скрыто округлением уровней), на 6 месяцев — 13,78% (−5 б.п.), на год — 13,54% (−9 б.п.). Рынок закладывает сохранение ставки около 13,9% в ближайшие три месяца и среднюю ставку на горизонте года ниже текущих 14%.</li>
+<li>По кварталам от даты котировок: через 3–6 месяцев — 13,66% (−11 б.п.). Более дальние кварталы шумные (через 6–9 месяцев +30 б.п., через 9–12 месяцев −56 б.п.), поэтому опорой служит средняя.</li>
+<li>Сроки дальше года — форвардные ставки с рыночной премией; средняя на 5 лет — 14,25% (−9 б.п.).</li>
+<li>Кривая ОФЗ (контекст): средний уровень +1 б.п., наклон 10Y−1Y +18 б.п. Снижение коротко-средних доходностей сопровождалось ростом длинных.</li>
+</ul>
+<h3>(в) Новостной фон по ДКП.</h3>
+<ul>
+<li>Сигналы: 5 ястребиных (средняя сила 0,40), 2 голубиных (0,65), 4 нейтральных.</li>
+<li>Взвешенный по силе баланс +0,70 — ястребиный перевес; по числу сигналов +3.</li>
+<li>Во второй половине недели ястребиный перевес немного ослаб: 0,40 → 0,30, сдвиг −0,10 к смягчению.</li>
+<li>Больше всего ястребиных сигналов дал курс рубля (3). По заявлениям ЦБ — по одному ястребиному и голубиному сигналу.</li>
+</ul>
+<p>Это согласуется с потоком событий. Набиуллина 09.11 и 12.11 говорила о недопустимости спешки со снижением и о высокой ставке «еще какое-то время». Вместе с тем она называла условие будущего смягчения — восстановление мощностей.</p>
+<p>Кросс-чтение:</p>
+<ul>
+<li>Ястребиная риторика не отразилась в ставках денежного рынка и свопах на горизонте года — они слегка сместились к смягчению.</li>
+<li>На ближнем горизонте (3 месяца) свопы закладывают сохранение ставки, что согласуется с моделью.</li>
+<li>Рост доли флоатеров в оборотах (ОФЗ +2,6 п.п., корпоративные +2,3 п.п. к прошлой неделе) однозначно сдвиг ожиданий не подтверждает.</li>
+</ul></div></div>
   </div>
 </details>
 
@@ -281,53 +424,161 @@
     <span class="sno">05</span>
     <span class="shead">
       <span class="stitle">Первичный рынок</span>
-      <span class="sdigest">Книг за период: <b>4</b></span>
+      <span class="sdigest">Закрыто книг: <b>11</b>; размещений без публичной книги: <b>5</b></span>
     </span>
     <span class="chev">+</span>
   </summary>
   <div class="sbody">
-    <div class="block">      <table>
+    <div class="block">      <p class="scroll-hint" id="table-hint-1" hidden="hidden">Таблицу можно прокрутить по горизонтали →</p><div class="table-scroll" tabindex="0" role="region" aria-label="Первичный рынок — таблица" aria-describedby="table-hint-1"><table>
         <thead><tr><th>Эмитент, серия</th><th>Статус</th><th class="r">Объём</th>
         <th class="r wr">Спред / ставка купона</th><th>Хронология</th></tr></thead>
         <tbody>
           <tr>
-            <td class="em">«Глоракс»<br>
-              <span style="color:var(--muted);font-weight:400">002P-01 (доп. выпуск №1)
-               · RU000A10FMQ8</span></td>
+            <td class="em">«Айдеко»<br>
+              <span style="color:var(--muted);font-weight:400">БО-02
+               · RU000A10GHX2</span></td>
             <td><span class="tag fl">размещено</span></td>
-            <td class="r num em">1,6 млрд рублей</td>
-            <td class="r num">цена 94,50% от номинала + НКД</td>
-            <td class="num" style="font-size:12px;color:var(--muted)">26.10 анонс книги — цена не ниже 94,50% от номинала + НКД; 03.11 книга открыта — цена 94,50% от номинала + НКД; 03.11 книга закрыта — цена 94,50% от номинала + НКД; 03.11 анонс размещения; 06.11 размещено</td>
+            <td class="r num em">58.266 млн рублей (размещено по карточке эмиссии на 15.11; объявлено — 500 млн рублей)</td>
+            <td class="r num">24.5% годовых (купоны 1-36)</td>
+            <td class="num" style="font-size:12px;color:var(--muted)">30.10 анонс размещения; 10.11 размещено</td>
           </tr>
           <tr>
-            <td class="em">«Южуралзолото Группа Компаний»<br>
-              <span style="color:var(--muted);font-weight:400">БО-КИ-01
-               · RU000A10GHQ6</span></td>
-            <td><span class="tag fl">закрыта</span></td>
-            <td class="r num em">550 млн юаней (по карточке эмиссии — 800 млн юаней)</td>
-            <td class="r num">9,70% годовых</td>
-            <td class="num" style="font-size:12px;color:var(--muted)">28.10 анонс книги — не выше 9,90% годовых; 03.11 книга открыта; 03.11 ориентир; 03.11 книга закрыта — 9,70% годовых; 03.11 книга закрыта — 9,70% годовых; 05.11 анонс размещения<br>размещение назначено: 06.11.2026</td>
-          </tr>
-          <tr>
-            <td class="em">«Т-Технологии»<br>
-              <span style="color:var(--muted);font-weight:400">КО-016
-               · RU000A10GGV8</span></td>
+            <td class="em">«СФО ВТБ РКС Олимп»<br>
+              <span style="color:var(--muted);font-weight:400">02
+               · RU000A10FU52</span></td>
             <td><span class="tag fl">размещено</span></td>
-            <td class="r num em">15 млрд рублей</td>
-            <td class="r num">16% годовых</td>
-            <td class="num" style="font-size:12px;color:var(--muted)">02.11 анонс размещения; 02.11 размещено</td>
+            <td class="r num em">1.01887 млрд рублей (размещено по карточке эмиссии на 15.11; объявлено — 6 млрд рублей)</td>
+            <td class="r num">15% годовых</td>
+            <td class="num" style="font-size:12px;color:var(--muted)">03.11 анонс размещения; 09.11 размещено</td>
           </tr>
           <tr>
-            <td class="em">«НК «Роснефть»»<br>
-              <span style="color:var(--muted);font-weight:400">006Р-01
+            <td class="em">«Джи-групп»<br>
+              <span style="color:var(--muted);font-weight:400">002Р-09
+               · RU000A10GKG1</span></td>
+            <td><span class="tag fl">размещено</span></td>
+            <td class="r num em">1 млрд рублей</td>
+            <td class="r num">спред к КС 500 б.п.</td>
+            <td class="num" style="font-size:12px;color:var(--muted)">05.11 анонс книги — спред к КС не выше 500 б.п.; 10.11 книга открыта — спред к КС не выше 500 б.п.; 10.11 книга закрыта; 11.11 анонс размещения; 13.11 размещено</td>
+          </tr>
+          <tr>
+            <td class="em">«КОННЕКТ»<br>
+              <span style="color:var(--muted);font-weight:400">БО-01
+               · RU000A10GHZ7</span></td>
+            <td><span class="tag fl">размещено</span></td>
+            <td class="r num em">0.692 млн рублей (размещено по карточке эмиссии на 15.11; объявлено — 100 млн рублей)</td>
+            <td class="r num">30% годовых (купоны 1-24)</td>
+            <td class="num" style="font-size:12px;color:var(--muted)">05.11 анонс размещения; 10.11 размещено</td>
+          </tr>
+          <tr>
+            <td class="em">Нижегородская область<br>
+              <span style="color:var(--muted);font-weight:400">34018
+               · RU000A10GK04</span></td>
+            <td><span class="tag fl">размещено</span></td>
+            <td class="r num em">20 млрд рублей</td>
+            <td class="r num">спред к КС 200 б.п.</td>
+            <td class="num" style="font-size:12px;color:var(--muted)">06.11 книга открыта — спред к КС не выше 250 б.п.; 10.11 книга открыта — спред к КС не выше 250 б.п.; 10.11 ориентир — спред к КС не выше 225 б.п.; 10.11 ориентир — спред к КС не выше 210 б.п.; 10.11 книга закрыта — спред к КС 200 б.п.; 12.11 размещено</td>
+          </tr>
+          <tr>
+            <td class="em">«Новые Технологии»<br>
+              <span style="color:var(--muted);font-weight:400">001Р-09
               </span></td>
             <td><span class="tag fl">закрыта</span></td>
-            <td class="r num em">—</td>
-            <td class="r num">8% годовых (купоны 1-2)</td>
-            <td class="num" style="font-size:12px;color:var(--muted)">05.11 книга открыта; 05.11 книга закрыта; 05.11 анонс размещения<br>размещение назначено: 10.11.2026</td>
+            <td class="r num em">900 млн рублей</td>
+            <td class="r num">18,00% годовых</td>
+            <td class="num" style="font-size:12px;color:var(--muted)">06.11 книга открыта — не выше 18,50% годовых; 12.11 книга открыта — не выше 18,50% годовых; 12.11 ориентир — не выше 18,00% годовых; 12.11 книга закрыта — 18,00% годовых; 13.11 анонс размещения<br>размещение назначено: 17.11.2026</td>
+          </tr>
+          <tr>
+            <td class="em">«Новые Технологии»<br>
+              <span style="color:var(--muted);font-weight:400">001Р-10
+              </span></td>
+            <td><span class="tag fl">закрыта</span></td>
+            <td class="r num em">100 млн рублей</td>
+            <td class="r num">спред к КС 400 б.п.</td>
+            <td class="num" style="font-size:12px;color:var(--muted)">06.11 книга открыта — спред к КС не выше 450 б.п.; 12.11 книга открыта — спред к КС не выше 450 б.п.; 12.11 ориентир — спред к КС не выше 400 б.п.; 12.11 книга закрыта — спред к КС 400 б.п.; 13.11 анонс размещения<br>размещение назначено: 17.11.2026</td>
+          </tr>
+          <tr>
+            <td class="em">«СОПФ ДОМ.РФ»<br>
+              <span style="color:var(--muted);font-weight:400">19
+               · RU000A10GKJ5</span></td>
+            <td><span class="tag fl">размещено</span></td>
+            <td class="r num em">10 млрд рублей</td>
+            <td class="r num">спред к КС 155 б.п.</td>
+            <td class="num" style="font-size:12px;color:var(--muted)">06.11 книга открыта; 10.11 книга открыта; 11.11 анонс размещения; 11.11 ориентир — спред к КС не выше 160 б.п.; 11.11 книга закрыта — спред к КС 155 б.п.; 13.11 размещено</td>
+          </tr>
+          <tr>
+            <td class="em">«Эталон-Финанс»<br>
+              <span style="color:var(--muted);font-weight:400">002P-06
+               · RU000A10GK12</span></td>
+            <td><span class="tag fl">размещено</span></td>
+            <td class="r num em">12,86 млрд рублей</td>
+            <td class="r num">спред к КС 400 б.п.</td>
+            <td class="num" style="font-size:12px;color:var(--muted)">09.11 книга открыта; 09.11 книга открыта — спред к КС не выше 400 б.п.; 09.11 книга закрыта; 09.11 анонс размещения; 12.11 размещено</td>
+          </tr>
+          <tr>
+            <td class="em">«Газпром капитал»<br>
+              <span style="color:var(--muted);font-weight:400">БО-003Р-31
+              </span></td>
+            <td><span class="tag fl">закрыта</span></td>
+            <td class="r num em">50 млрд рублей (итог книги; первоначально не менее 20 млрд)</td>
+            <td class="r num">спред к КС 150 б.п.</td>
+            <td class="num" style="font-size:12px;color:var(--muted)">09.11 анонс книги — спред к КС не выше 160 б.п.; 13.11 книга открыта — спред к КС не выше 160 б.п.; 13.11 ориентир — спред к КС не выше 150 б.п.; 13.11 книга закрыта — спред к КС 150 б.п.<br>размещение назначено: 18.11.2026</td>
+          </tr>
+          <tr>
+            <td class="em">«ИКС 5 ФИНАНС»<br>
+              <span style="color:var(--muted);font-weight:400">003P-24
+               · RU000A10GEH2</span></td>
+            <td><span class="tag fl">размещено</span></td>
+            <td class="r num em">22 млрд рублей</td>
+            <td class="r num">спред к КС 130 б.п.</td>
+            <td class="num" style="font-size:12px;color:var(--muted)">09.11 анонс книги — спред к КС не выше 140 б.п.; 10.11 книга открыта — спред к КС не выше 140 б.п.; 10.11 книга закрыта — спред к КС 130 б.п.; 10.11 анонс размещения; 13.11 размещено</td>
+          </tr>
+          <tr>
+            <td class="em">«АБЗ-1»<br>
+              <span style="color:var(--muted);font-weight:400">002Р-08
+               · RU000A10GKF3</span></td>
+            <td><span class="tag fl">размещено</span></td>
+            <td class="r num em">1 млрд рублей</td>
+            <td class="r num">19% годовых (купоны 1-36)</td>
+            <td class="num" style="font-size:12px;color:var(--muted)">10.11 книга открыта — не выше 19,00% годовых; 10.11 книга закрыта — 19,00% годовых; 10.11 анонс размещения; 13.11 размещено</td>
+          </tr>
+          <tr>
+            <td class="em">«ПИК-Корпорация»<br>
+              <span style="color:var(--muted);font-weight:400">001Р-06
+               · RU000A10GHF9</span></td>
+            <td><span class="tag fl">размещено</span></td>
+            <td class="r num em">2 млрд рублей</td>
+            <td class="r num">17% годовых (купоны 1-8)</td>
+            <td class="num" style="font-size:12px;color:var(--muted)">10.11 книга открыта; 10.11 анонс размещения; 10.11 книга закрыта; 13.11 размещено</td>
+          </tr>
+          <tr>
+            <td class="em">«ДОМ.РФ Ипотечный агент»<br>
+              <span style="color:var(--muted);font-weight:400">БО-001P-71
+               · RU000A10GKH9</span></td>
+            <td><span class="tag fl">размещено</span></td>
+            <td class="r num em">6,63 млрд рублей</td>
+            <td class="r num">15.14% годовых (купоны 1)</td>
+            <td class="num" style="font-size:12px;color:var(--muted)">10.11 анонс размещения; 12.11 книга открыта; 12.11 книга закрыта; 13.11 размещено</td>
+          </tr>
+          <tr>
+            <td class="em">«ВТ Логистик»<br>
+              <span style="color:var(--muted);font-weight:400">БО-01
+               · RU000A10GJZ3</span></td>
+            <td><span class="tag fl">размещено</span></td>
+            <td class="r num em">100 млн рублей</td>
+            <td class="r num">22% годовых (купоны 1-12)</td>
+            <td class="num" style="font-size:12px;color:var(--muted)">10.11 анонс размещения; 12.11 размещено</td>
+          </tr>
+          <tr>
+            <td class="em">«ТД РКС»<br>
+              <span style="color:var(--muted);font-weight:400">002Р-09
+               · RU000A10G1Q1</span></td>
+            <td><span class="tag fl">размещено</span></td>
+            <td class="r num em">500 млн рублей</td>
+            <td class="r num">24% годовых (купоны 1-36)</td>
+            <td class="num" style="font-size:12px;color:var(--muted)">11.11 (с 11.09) размещено</td>
           </tr>
         </tbody>
-      </table></div>
+      </table></div></div>
   </div>
 </details>
 
@@ -343,11 +594,11 @@
   <div class="sbody">
     <div class="cols2">
       <div class="block"><div class="btitle">Лидеры оборота за период</div>
-        <table><thead><tr><th>Выпуск</th><th class="r">Оборот</th><th class="r">Доля</th><th class="r">Сделок</th></tr></thead>
-        <tbody id="topTable"></tbody></table></div>
+        <p class="scroll-hint" id="table-hint-2" hidden="hidden">Таблицу можно прокрутить по горизонтали →</p><div class="table-scroll" tabindex="0" role="region" aria-label="Топ корпоративных выпусков — таблица" aria-describedby="table-hint-2"><table><thead><tr><th>Выпуск</th><th class="r">Оборот</th><th class="r">Доля</th><th class="r">Сделок</th></tr></thead>
+        <tbody id="topTable"></tbody></table></div></div>
       <div class="block"><div class="btitle">Лидер каждого дня</div>
-        <table><thead><tr><th>День</th><th>Выпуск</th><th class="r">Оборот</th><th class="r">Доля дня</th></tr></thead>
-        <tbody id="dayTable"></tbody></table></div>
+        <p class="scroll-hint" id="table-hint-3" hidden="hidden">Таблицу можно прокрутить по горизонтали →</p><div class="table-scroll" tabindex="0" role="region" aria-label="Топ корпоративных выпусков — таблица" aria-describedby="table-hint-3"><table><thead><tr><th>День</th><th>Выпуск</th><th class="r">Оборот</th><th class="r">Доля дня</th></tr></thead>
+        <tbody id="dayTable"></tbody></table></div></div>
     </div>
   </div>
 </details>
@@ -357,56 +608,170 @@
     <span class="sno">07</span>
     <span class="shead">
       <span class="stitle">Ключевые события</span>
-      <span class="sdigest">Сюжетов: <b>9</b></span>
+      <span class="sdigest">Сюжетов: <b>12</b></span>
     </span>
     <span class="chev">+</span>
   </summary>
   <div class="sbody">
     <div class="block" style="padding:2px 21px">
       <details class="ev" open>
-        <summary><span class="evdate">05.11</span>
-        <span>Банк России в резюме и комментарии к прогнозу: проинфляционные риски преобладают, прогноз инфляции на 2026 г. — 7,1–7,6%</span></summary>
-        <div class="evb"><p>05.11 Банк России опубликовал резюме обсуждения ключевой ставки по итогам заседания 23.10 (на нём ставка сохранена на уровне 14,00%) и комментарий к среднесрочному прогнозу. В резюме участники согласились со следующим:</p><p>- проинфляционные риски по-прежнему преобладают над дезинфляционными на среднесрочном горизонте;</p><p>- инфляция по итогам 2026 г. ожидается выше июльских оценок;</p><p>- восстановление производственных мощностей требует больше времени, чем ожидалось ранее;</p><p>- инфляционные ожидания остаются высокими;</p><p>- для устойчивого возвращения инфляции к цели необходимо дольше поддерживать умеренно жёсткие денежно-кредитные условия.</p><p>Текущий рост цен в III квартале составил 8,0% с сезонной корректировкой в годовом выражении после 4,8% во II квартале; базовая инфляция — 6,2% после 4,5%. По оценке ЦБ, внутренний спрос вновь превысил возможности предложения на фоне временного сокращения производственных возможностей в отдельных отраслях. Рост ВВП в III квартале составил 1,0% г/г против 0,5% в предыдущем прогнозе.</p><p>Прогнозные параметры, обновлённые по итогам заседания 23.10 и разобранные в комментарии:</p><p>- инфляция на 2026 г. — 7,1–7,6% (в июльском прогнозе 6,0–7,0%), возвращение годовой инфляции к 4% — в 2027 г.;</p><p>- рост ВВП в 2026 г. — 0,5–1,0%;</p><p>- средняя ключевая ставка — 14,6% в 2026 г., 12,5–13,5% в 2027 г. (было 10,5–12,5%), 9,0–10,0% в 2028 г. (было 8,0–9,0%).</p><p>В прогнозе ЦБ от 23.10 средняя ставка с 26 октября до конца 2026 г. заложена на уровне 14,0%. Публикация пришлась на вторую половину недели, когда новостной фон по ДКП сместился в ястребиную сторону, а длинные доходности ОФЗ выросли: 10Y — на 21,5 б.п. за период, в основном 06.11.</p></div>
+        <summary><span class="evdate">09.11</span>
+        <span>Набиуллина в Госдуме: в сентябре–октябре снижение ставки не рассматривали, ставка останется двузначной весь 2027 год</span></summary>
+        <div class="evb"><div class="prose"><p>Выступление прошло на совместном заседании комитетов Госдумы по подготовке к рассмотрению Основных направлений единой государственной денежно-кредитной политики на 2027–2029 годы. Председатель Банка России сообщила: «В сентябре и октябре мы действительно даже не рассматривали снижение ставки, только сохранение».</p>
+<ul>
+<li>Причина — ограничение производственных возможностей после атак на НПЗ, другие промышленные предприятия, ЦОДы и логистические центры.</li>
+<li>По мере восстановления мощностей откроется пространство для снижения ставки, «но не ранее этого».</li>
+<li>Она заявила о недопустимости спешки со снижением: поспешное снижение привело бы к «обратным результатам: росту процентных ставок в экономике» и к росту цен; «чрезмерный рост спроса в текущих обстоятельствах может ускорить инфляцию».</li>
+<li>В базовом сценарии ставка снижается, но остаётся двузначной в течение всего следующего года.</li>
+<li>«Сейчас нет ничего, что говорило бы о переохлаждении экономики». К признакам переохлаждения отнесены рост безработицы, снижение реальных доходов и инфляция ниже цели.</li>
+<li>Разрыв в 8–9 п.п. между ключевой ставкой 14% и устойчивой инфляцией 5–6% объяснён продолжительным инфляционным давлением и большой долей льготного кредитования.</li>
+<li>Период жёсткой ДКП назван необходимым этапом на пути к низкой инфляции и умеренным ставкам: «этот путь надо пройти до конца».</li>
+</ul>
+<p>На следующий торговый день, 10.11, доходность 10Y по G-curve выросла на 11,9 б.п. (до 16,764%), а доходность 1Y снизилась на 16,5 б.п. (до 13,919%).</p></div></div>
       </details>
       <details class="ev">
-        <summary><span class="evdate">03.11</span>
-        <span>Правительство разрешило Минфину занять в 2026 г. до 1 трлн руб. сверх пределов госдолга и программы заимствований</span></summary>
-        <div class="evb"><p>Распоряжением правительства от 03.11.2026 № 3186-р (сообщения опубликованы 05.11) Минфину предоставлено право осуществить в 2026 г. дополнительные внутренние заимствования на сумму до 1 трлн руб. Это превышение верхнего предела государственного внутреннего долга и программы внутренних заимствований, установленных законом о федеральном бюджете. Разрешение не означает обязательного привлечения всей суммы.</p><p>По данным Ведомостей и Коммерсанта, предельный объём размещения ОФЗ на 2026 г. ранее был утверждён на уровне 6,47 трлн руб. по номиналу. Соотношение этой величины с дополнительным лимитом в сообщениях описывается по-разному.</p><p>Для сопоставления:</p><p>- законом о бюджете на 2026 г. дефицит заложен в 3 786,4 млрд руб., государственные заимствования — в 3 980,1 млрд руб.;</p><p>- уточнённый план по состоянию на 13.07 предусматривал дефицит 4,83 трлн руб.;</p><p>- по предварительной оценке Минфина, дефицит за январь–сентябрь составил 5 186 млрд руб.</p></div>
+        <summary><span class="evdate">12.11</span>
+        <span>Набиуллина представила ОНДКП: ставка «останется высокой еще какое-то время», объём льготных кредитов — около 19 трлн руб.</span></summary>
+        <div class="evb"><div class="prose"><p>На пленарном заседании Госдумы Набиуллина представила доклад об ОНДКП на 2027 год и период 2028–2029 годов.</p>
+<ul>
+<li>«Ключевая ставка высокая уже три года и останется высокой еще какое-то время»; «Это болезненный период, но выбора у нас нет».</li>
+<li>На поставленный ею вопрос, оправдано ли это с точки зрения интересов экономики, граждан и бизнеса, она ответила: «Я абсолютно уверена, что да».</li>
+<li>О льготном кредитовании: по оценкам Банка России, объём таких кредитов приблизился к 19 трлн руб., это 14% всех рублёвых кредитов экономике; «Большой объем льготных кредитов — это одна из причин высокой ключевой ставки, которая вынуждена сильнее сдерживать нельготную, рыночную часть кредитной активности».</li>
+<li>В выступлениях в Госдуме прозвучал базовый прогноз Банка России: «К цели по инфляции в 4% мы рассчитываем прийти в следующем году». Ставка будет постепенно и аккуратно снижаться и достигнет нейтрального диапазона 7,5–8,5% в 2029 году; это оценка нейтрального уровня, а не утверждённый график.</li>
+</ul>
+<p>Ориентиры совпадают со среднесрочным прогнозом Банка России от 23.10.2026: средняя ключевая ставка 12,5–13,5% в 2027 году, 9,0–10,0% в 2028-м и 7,5–8,5% в 2029-м; инфляция 4,0% декабрь к декабрю в 2027 году. В день выступления доходность 10Y по G-curve выросла на 6,7 б.п., до 16,728%.</p></div></div>
       </details>
       <details class="ev">
-        <summary><span class="evdate">06.11</span>
-        <span>Минфин сообщил о регистрации 4 допвыпусков ОФЗ-ПД и нового ОФЗ-ИН на 1,05 трлн руб.; предложение на аукционах — с 18.11</span></summary>
-        <div class="evb"><p>06.11 Минфин сообщил о регистрации следующих выпусков:</p><p>- ОФЗ-ПД 26218, погашение в сентябре 2031 г.;</p><p>- ОФЗ-ПД 26239, погашение в июле 2031 г.;</p><p>- ОФЗ-ПД 26221, погашение в марте 2033 г.;</p><p>- ОФЗ-ПД 26233, погашение в июле 2035 г.;</p><p>- новый ОФЗ-ИН 52006, погашение в июне 2037 г.</p><p>Каждый из четырёх допвыпусков ОФЗ-ПД — до 200 млрд руб. по номиналу (всего до 800 млрд руб.). ОФЗ-ИН 52006 — до 250 млрд руб. по номиналу без учёта индексации. Общий объём — 1,05 трлн руб.</p><p>Бумаги будут предлагаться на аукционах с 18.11. Конкретные даты аукционов и точная дата регистрации в сообщениях не указаны. Речь идёт о регистрации выпусков, а не об их размещении. О проведении аукционов ОФЗ в отчётную неделю в сообщениях не говорится; 04.11 аукционы не проводились в связи с Днём народного единства.</p><p>Оценки аналитиков, опубликованные 07.11:</p><p>- «Вектор Капитала» (Глеб Лагозин) допускает умеренное давление дополнительного предложения на котировки ОФЗ, особенно выпусков с погашением в 2031–2035 гг., и полагает, что разместить все зарегистрированные бумаги до конца года вряд ли удастся;</p><p>- Инго Банк ожидает краткосрочного давления на длинные ОФЗ с купоном около 7% и допускает доходность новых выпусков около 16,5%.</p><p>Сообщение о регистрации совпало по дате с днём наибольшего за неделю оборота ОФЗ (19,65 млрд руб. 06.11) и ростом доходности 10Y на 20,3 б.п. за день.</p></div>
+        <summary><span class="evdate">11.11</span>
+        <span>Аукционы ОФЗ: 65,69 млрд руб. по номиналу, с доразмещением 26250 — 88,87 млрд руб.; спрос 134,7 млрд руб.</span></summary>
+        <div class="evb"><div class="prose"><p>Минфин провёл аукционы по двум выпускам ОФЗ-ПД в объёме доступных остатков.</p>
+<ul>
+<li>ОФЗ 26235 (погашение 12.03.2031, купон 5,9%): размещено 34,06 млрд руб. по номиналу (выручка 24,57 млрд руб.) при спросе 60,65 млрд руб.; средневзвешенная цена 71,2042%, доходность 15,79%.</li>
+<li>ОФЗ 26250 (погашение 10.06.2037, купон 12%): на аукционе размещено 31,63 млрд руб. по номиналу (выручка 26,55 млрд руб.) при спросе 74,06 млрд руб.; средневзвешенная цена 79,3107%, доходность 16,78%. Доразмещение после аукциона — 23,18 млрд руб. по номиналу (выручка 19,46 млрд руб.); всего по выпуску 54,81 млрд руб. по номиналу (выручка 46,01 млрд руб.).</li>
+<li>Итого на аукционах — 65,69 млрд руб. по номиналу (выручка 51,12 млрд руб.), с учётом доразмещения ОФЗ 26250 — 88,87 млрд руб. по номиналу (выручка 70,58 млрд руб.). Совокупный спрос на аукционах — 134,7 млрд руб.</li>
+</ul>
+<p>В публикациях спрос охарактеризован как более слабый, чем на предыдущем аукционе конца октября и в среднем за последние недели. По оценке Банка России, до конца года Минфину потребуется разместить ОФЗ ещё примерно на 2 трлн руб. (в среднем около 218 млрд руб. на аукцион). Доля системно значимых банков на аукционах в октябре, по данным ЦБ, снизилась до 45,5% с 73,6% в сентябре. Ранее, по <a href="https://frankmedia.ru/314011" target="_blank" rel="noopener noreferrer">сообщению Frank Media от 05.11.2026</a>, распоряжением Правительства от 03.11.2026 № 3186-р Минфину было разрешено при необходимости привлечь до 1 трлн руб. сверх первоначально утверждённой программы внутренних заимствований 2026 года. Это решение относится к предыдущей неделе и приводится как фон для аукционов 9–15 ноября; разрешённая сумма не означает фактически привлечённый объём.</p></div></div>
       </details>
       <details class="ev">
-        <summary><span class="evdate">02–05.11</span>
-        <span>МГКЛ допустило в периоде ещё два техдефолта (всего три с 29.10); НРА 02.11 понизило рейтинг компании до C|ru|</span></summary>
-        <div class="evb"><p>До начала периода, 29.10, МГКЛ не выплатило 21-й купон по серии 001Р-07 (24,66 млн руб.). 02.11 НРА понизило кредитный рейтинг ПАО «МГКЛ» до C|ru|; уровень и дата совпадают с данными Cbonds. По сообщениям, статус «под наблюдением» сохранён в связи с неопределённостью планов компании по урегулированию ситуации с выплатой купона.</p><p>В периоде компания допустила ещё два технических дефолта:</p><p>- 8-й купон по серии 001РS-02 (ставка 24,5% годовых) на 20,14 млн руб.: срок выплаты с учётом переноса — 02.11, эмитент сообщил о невыплате 03.11;</p><p>- 28-й купон по серии 001Р-06 (23% годовых, 18,90 руб. на облигацию) на 9,45 млн руб.: срок 04.11 был перенесён на 05.11, сообщение вышло 06.11.</p><p>Причина во всех случаях — неперечисление средств на счёт НРД. Компания заявила, что разрабатывает меры по разрешению ситуации и продолжает работу по урегулированию задолженности дочерних компаний. По сообщениям СМИ, счета ряда дочерних компаний заблокированы из-за налоговой задолженности. Операционный отчёт за январь–октябрь, запланированный на 02.11, опубликован не был.</p><p>03.11 акции МГКЛ снизились на 21,9% (до 0,61 руб.), Мосбиржа проводила по ним дискретный аукцион. По сообщениям, с 05.11 девять выпусков облигаций МГКЛ включены в Сектор компаний повышенного инвестиционного риска. По данным Cbonds (сообщение от 07.11), со 2 по 6 ноября на рынке зафиксировано 26 дефолтов и техдефолтов; новых эмитентов среди нарушителей не появилось.</p></div>
+        <summary><span class="evdate">11–13.11</span>
+        <span>Цены за 3–9 ноября +0,12%, ЦБ оценил годовую инфляцию в октябре вблизи 7%; рост ВВП в III квартале — 1,0% г/г</span></summary>
+        <div class="evb"><div class="prose"><ul>
+<li>11.11 опубликованы данные Росстата за неделю 3–9 ноября: цены выросли на 0,12% после снижения на 0,04% неделей ранее, с начала года — на 6,33%. Годовая инфляция на 9 ноября, по оценке Минэкономразвития, — 6,98% против 6,95% на 2 ноября; расчёт Интерфакса по данным Росстата — 6,97%.</li>
+<li>В тот же день Банк России в комментарии «Денежно-кредитные условия и трансмиссия ДКП» оценил годовую инфляцию в октябре по недельным данным вблизи 7%. Денежно-кредитные условия в сентябре–октябре оставались умеренно жёсткими.</li>
+<li>Ставки денежного рынка на сроках до 3 месяцев держались вблизи ключевой ставки: ROISfix к концу октября — 14,0–14,1%. На сроках 6 месяцев и 1 год ставки выросли на 22 и 27 б.п., до 14,28% и 14,36%.</li>
+<li>Годовой прирост M2X в сентябре снизился до 11,3% с 11,8% в августе и, по оперативным данным, снизился в октябре.</li>
+<li>Прогноз Банка России от 23.10.2026 по инфляции на 2026 год — 7,1–7,6% декабрь к декабрю.</li>
+<li>13.11 Росстат предварительно оценил рост ВВП в III квартале в 1,0% г/г (во II квартале — 1,3%, в I квартале — снижение на 0,2%). Прогноз Банка России на 2026 год — 0,5–1,0%.</li>
+</ul></div></div>
       </details>
       <details class="ev">
-        <summary><span class="evdate">05.11</span>
-        <span>АКРА понизило рейтинги «Распадской» до AA(RU) и ХМАО-Югры; «Эксперт РА» понизил «РЕГИОН-ПРОДУКТ» с ruC до ruD</span></summary>
-        <div class="evb"><p>По бюллетеню АКРА за 05.11 кредитный рейтинг ПАО «Распадская» понижен до AA(RU), прогноз «Негативный»; прежний уровень в сообщениях не приводится. Согласно публикациям, негативный прогноз связан с вероятностью менее уверенного восстановления финансовых показателей компании в 2027 г.</p><p>АКРА 05.11 также понизило кредитный рейтинг Ханты-Мансийского автономного округа — Югры (прогноз «развивающийся») и рейтинг облигационного выпуска округа. Новый уровень в сообщениях расходится:</p><p>- AA+(RU) — по данным Коммерсанта и ленты рейтинговых действий АКРА;</p><p>- AA(RU) — по сообщению Интерфакса.</p><p>Уровень требует проверки. По прогнозу АКРА в изложении Коммерсанта, соотношение долга и текущих доходов округа по итогам 2026 г. составит 32%.</p><p>«Эксперт РА» (релиз от 05.11) понизил рейтинг кредитоспособности АО «РЕГИОН-ПРОДУКТ» с ruC до ruD, изменил прогноз на стабильный и снял статус «под наблюдением». По сообщениям от 02.11, эмитент допустил дефолт по погашению облигаций серии 001Р-04 номиналом 100 млн руб.; технический дефолт по погашению впервые был зафиксирован 20.10.</p></div>
+        <summary><span class="evdate">10.11</span>
+        <span>Минфин: дефицит бюджета за январь–октябрь — 5,234 трлн руб. (2,3% ВВП) против 3,942 трлн руб. годом ранее</span></summary>
+        <div class="evb"><div class="prose"><p>Минфин опубликовал предварительную оценку исполнения федерального бюджета за январь–октябрь 2026 года:</p>
+<ul>
+<li>дефицит — 5,234 трлн руб., или 2,3% ВВП (годом ранее — 3,942 трлн руб., 1,8% ВВП);</li>
+<li>доходы — 33,176 трлн руб. (+10,8% г/г), в том числе нефтегазовые — 6,442 трлн руб. (−14,1%);</li>
+<li>расходы — 38,41 трлн руб. (+13,4%).</li>
+</ul>
+<p>Для сопоставления:</p>
+<ul>
+<li>за январь–сентябрь дефицит, по краткой информации Минфина, составлял 5,186 трлн руб.;</li>
+<li>закон о бюджете на 2026 год предусматривает дефицит 3 786,4 млрд руб. (1,6% ВВП) на весь год;</li>
+<li>оценка исполнения бюджета-2026 в пояснительной записке к проекту бюджета на 2027–2029 годы — 7 344,9 млрд руб. (3,2% ВВП).</li>
+</ul></div></div>
       </details>
       <details class="ev">
-        <summary><span class="evdate">05.11</span>
-        <span>Банки-кредиторы «Самолёта» достигли принципиальной договорённости о программе оздоровления; параметры — до конца 2026 г.</span></summary>
-        <div class="evb"><p>05.11 заместитель председателя правления Сбербанка Анатолий Попов сообщил, что основные банки-кредиторы девелопера «Самолёт» достигли принципиальных договорённостей по комплексной программе улучшения финансового положения компании. По его словам:</p><p>- программа шире обычной реструктуризации долга;</p><p>- в ней предполагается учесть интересы банков, держателей облигаций и акционеров;</p><p>- окончательные параметры согласовываются, завершить работу планируется до конца 2026 г.</p><p>Механизм, состав участников и сроки соглашения не раскрываются. Акции компании 05.11 росли; оценки внутридневного роста в сообщениях различаются — от 7% утром до 16% к середине дня.</p></div>
+        <summary><span class="evdate">09–11.11</span>
+        <span>«Самолет» не исполнил в срок оферту по БО-П05 9 ноября и выкупил около 102,77 тыс. облигаций 11 ноября</span></summary>
+        <div class="evb"><div class="prose"><p>09.11 ГК «Самолет» не исполнила в установленную дату оферту по биржевым облигациям БО-П05 (ISIN RU000A100Q50).</p>
+<ul>
+<li>По раскрытию эмитента, количество приобретённых облигаций — 0 штук.</li>
+<li>Компания сослалась на техническую причину на стороне банка и сообщила, что необходимая сумма переведена 09.11 в 18:31.</li>
+<li>Выкуп перенесён на 11.11; требования принимались с 28.10 по 03.11 включительно.</li>
+<li>Cbonds квалифицировал ситуацию как технический дефолт по пут-оферте.</li>
+<li>10.11, по данным РБК, акции компании на минимуме снижались на 12,37%, до 287 руб.; к 18:10 мск, по данным Frank Media, они стоили 295 руб. Публикации связывают снижение с задержкой выкупа.</li>
+<li>11.11 эмитент выкупил около 102,77 тыс. облигаций (номинал 102,77 млн руб.) по цене 100% и выплатил НКД из расчёта 3,07 руб. на облигацию.</li>
+</ul>
+<p>Ранее, в октябре, АКРА понизило рейтинг компании до BBB(RU) с негативным прогнозом (по данным Forbes).</p></div></div>
       </details>
       <details class="ev">
-        <summary><span class="evdate">05.11</span>
-        <span>Один из выпусков облигаций «Селигдара» 05.11 дешевел более чем на 28% на фоне сообщений об ужесточении обвинений совладельцам</span></summary>
-        <div class="evb"><p>05.11 котировки одного из выпусков облигаций «Селигдара» снижались более чем на 28%, акций — более чем на 20%. По данным Cbonds, ряд выпусков облигаций подешевел на 7–10%.</p><p>Снижение происходило на фоне сообщений Коммерсанта со ссылкой на источники: МВД ужесточило обвинение фигурантам дела о хищении 8,8 млрд руб. у шести НПФ. Среди них — совладельцы «Селигдара» Сергей Васильев и Константин Бейрит; помимо мошенничества им вменена организация преступного сообщества.</p><p>Реакция компании:</p><p>- направила обращение в Банк России и Мосбиржу с просьбой прояснить движение бумаг и расценивает произошедшее как манипулятивное;</p><p>- Александр Хрущ заявил, что уголовное обвинение физических лиц не возлагает на общества группы обязанность отвечать по их обязательствам, а арест долей не равнозначен аресту производственных активов;</p><p>- по заявлению компании, обвинения были предъявлены ещё в конце сентября.</p></div>
+        <summary><span class="evdate">10–11.11</span>
+        <span>МГКЛ допустила четвёртый и пятый техдефолты по купонам; просрочка по пяти купонам — 87,5 млн руб.</span></summary>
+        <div class="evb"><div class="prose"><ul>
+<li>10.11 — четвёртый техдефолт ПАО «МГКЛ»: по 5-му купону выпуска 001РS-03 на 13,47 млн руб.; причина — неперечисление денежных средств на счёт НРД.</li>
+<li>11.11 — пятый техдефолт: по 11-му купону выпуска 001РS-01 на 19,7 млн руб.</li>
+<li>Совокупная задолженность по пяти купонам — 87,5 млн руб. Ранее техдефолты допущены по выпускам 001Р-07 (конец октября), 001РS-02 (03.11) и 001Р-06 (06.11).</li>
+<li>Представитель владельцев облигаций Первоуральскбанк не смог получить от эмитента график и источники погашения просроченной задолженности.</li>
+</ul>
+<p>По сообщениям, Московская биржа с 13.11 включила акции МГКЛ в сектор компаний повышенного инвестиционного риска. Компания, по тем же сообщениям, планирует 16.11 представить официальное заявление о ситуации в группе. До конца ноября по купонам предстоит выплатить около 46,6 млн руб.</p></div></div>
       </details>
       <details class="ev">
-        <summary><span class="evdate">27.10–02.11</span>
-        <span>Росстат: цены за неделю 27.10–02.11 снизились на 0,04%; годовая инфляция на 02.11 — 6,95% (оценка МЭР)</span></summary>
-        <div class="evb"><p>По данным Росстата, потребительские цены за неделю с 27.10 по 02.11 снизились на 0,04% после роста на 0,08% неделей ранее. По оценке Минэкономразвития, годовая инфляция на 02.11 замедлилась до 6,95% с 7,11% на 26.10. Данные вышли после завершения торгов 06.11: публикация Росстата переносилась на 23:00 мск 06.11, сообщения СМИ датированы 07.11. Поэтому на торгах отчётной недели они отразиться не могли.</p></div>
+        <summary><span class="evdate">09–13.11</span>
+        <span>«СибСульфур»: два техдефолта; сумма первого купона расходится в сообщениях эмитента и ПВО</span></summary>
+        <div class="evb"><div class="prose"><p>09.11 АКРА присвоило рейтингу ООО «СибСульфур» B(RU) статус «под наблюдением» при стабильном прогнозе. По сообщениям, это связано с намерением МФК «Фордевинд» подать заявление о банкротстве компании. Затем эмитент допустил два технических дефолта:</p>
+<ul>
+<li>По 4-му купону БО-02-001P срок выплаты — 11.11; ПВО сообщил о наступлении технического дефолта 12.11. Сумма расходится между публикациями: в <a href="https://smartlab.news/read/210711-sibsulfur-dopustil-texdefolt-po-4-mu-kuponu-obligacii-serii-bo-02-001p" target="_blank" rel="noopener noreferrer">копии раскрытия эмитента</a> указано 18 489 038,88 руб. (около 18,49 млн руб.), а в <a href="https://e-disclosure.azipi.ru/messages/4607537/" target="_blank" rel="noopener noreferrer">исправленном сообщении ПВО от 13.11</a> — 18 390 397,35 руб. (около 18,39 млн руб.). Причина расхождения не установлена; сумма эмитента проверена по опубликованной копии, прямое раскрытие при проверке было недоступно. Заявленный срок устранения неисполнения — не позднее 25.11; подтверждения выплаты нет.</li>
+<li>Отдельно не исполнены 9-й купон и частичное погашение БО-01-001P со сроком выплаты 12.11; сообщение опубликовано 13.11. По <a href="https://www.disclosure.ru/rus/corpnews/news.shtml?newsisn=9495203" target="_blank" rel="noopener noreferrer">раскрытию эмитента</a>, сумма составляет 48 645 652,32 руб., включая 14 280 052,32 руб. купона и 34 365 600 руб. амортизации. Заявленный срок исполнения — не позднее 26.11; это план, а не подтверждённая выплата.</li>
+</ul>
+<p>Сумма двух неисполненных обязательств составляет около 67,135 млн руб. при использовании суммы первого купона из копии раскрытия эмитента и около 67,036 млн руб. при использовании суммы ПВО. Таким образом, ранее указанная оценка около 67,1 млн руб. основана на сумме эмитента; точный совокупный размер задолженности остаётся зависимым от неразрешённого расхождения источников. По объяснению эмитента, неисполнение связано с недостатком средств вследствие непоступления платежей от контрагентов.</p></div></div>
       </details>
       <details class="ev">
-        <summary><span class="evdate">05.11</span>
-        <span>Нефтегазовые доходы в октябре — 971,2 млрд руб.; Минфин с 09.11 увеличит покупки валюты до 15,6 млрд руб. в день</span></summary>
-        <div class="evb"><p>По данным Минфина, опубликованным 05–06.11, нефтегазовые доходы федерального бюджета в октябре составили 971,2 млрд руб. против 888,6 млрд руб. годом ранее — максимум за полтора года. Выплаты нефтяным компаниям по топливному демпферу составили 415 млрд руб. За январь–сентябрь нефтегазовые доходы, по предварительной оценке Минфина, составили 5 471 млрд руб. (годом ранее — 6 609 млрд руб.).</p><p>По сообщениям, Минфин с 09.11 по 04.12 направит на покупку валюты и золота в рамках бюджетного правила 312,63 млрд руб., или 15,6 млрд руб. в день. С 07.10 по 06.11 было 279,42 млрд руб., или 12,7 млрд руб. в день. Ожидаемые дополнительные нефтегазовые доходы в ноябре — 391,16 млрд руб.; фактические нефтегазовые доходы октября отклонились от базового месячного объёма на −78,53 млрд руб.</p><p>Официальный курс доллара за период вырос с 80,5573 до 82,1386 руб. (+1,96%), юаня — с 12,0873 до 12,2651 руб. (+1,47%).</p></div>
+        <summary><span class="evdate">12–13.11</span>
+        <span>Техдефолты: «Агро-Фрегат» не погасил 48,2 млн руб. амортизации по БО-01, «Урожай» — купон БО-04 на 22,4 млн руб.</span></summary>
+        <div class="evb"><div class="prose"><ul>
+<li>ООО «Агро-Фрегат» 12.11 допустило технический дефолт при погашении второй части амортизации выпуска БО-01. Из 50 млн руб. перечислено 1,8 млн руб. (3,6%), непогашенными остались 48,2 млн руб.; 10-й купон выплачен в полном объёме. Эмитент подтвердил готовность погасить остаток в течение 10 календарных дней. Причина, по данным Frank Media, — остановка судоходства в Азово-Черноморском бассейне и задержка экспортной выручки.</li>
+<li>ООО «Урожай» не исполнило 12.11 обязательство по выплате 10-го купона выпуска БО-04 на 22,4 млн руб.; 13.11 наступил технический дефолт. О нём сообщил представитель владельцев облигаций ООО «Волста». По данным Cbonds, это первый техдефолт эмитента; причины на момент сообщения не раскрывались.</li>
+</ul></div></div>
+      </details>
+      <details class="ev">
+        <summary><span class="evdate">09–13.11</span>
+        <span>Рейтинги: АКРА понизило «Балтийский лизинг» до A(RU) и «Флит» до BBB+(RU), НКР присвоило РЖД AAA.ru</span></summary>
+        <div class="evb"><div class="prose"><p>АКРА:</p>
+<ul>
+<li>09.11 присвоило рейтингу ООО «СибСульфур» B(RU) статус «под наблюдением», прогноз стабильный;</li>
+<li>10.11 повысило рейтинг «Элтеры» до BBB+(RU), прогноз стабильный;</li>
+<li>11.11 понизило рейтинг ООО «Балтийский лизинг» до A(RU), прогноз негативный, рейтинг под наблюдением;</li>
+<li>11.11 повысило рейтинг ЕКС до A(RU), прогноз стабильный;</li>
+<li>13.11 понизило рейтинг «Флита» до BBB+(RU), прогноз негативный.</li>
+</ul>
+<p>НКР 13.11 присвоило РЖД кредитный рейтинг AAA.ru, прогноз стабильный.</p>
+<p>Эксперт РА:</p>
+<ul>
+<li>10.11 понизил рейтинг «КОНТРОЛ лизинга» до ruB-, прогноз развивающийся, рейтинг под наблюдением;</li>
+<li>10.11 присвоил «Бамтоннельстрой-КТ» рейтинг ruA, прогноз стабильный;</li>
+<li>12.11 подтвердил рейтинг ООО «ДелоПортс» на уровне ruAA- и снял статус «под наблюдением». По сообщению Интерфакса, прогноз стабильный, а снятие статуса связано с переходом 100% доли группы «Дело» к Росатому;</li>
+<li>13.11 отозвал без подтверждения рейтинг МФК «Лайм-Займ» и снял статус «под наблюдением» в связи с началом исключения компании из реестра МФО по её инициативе. Ранее действовал рейтинг ruBB+ со стабильным прогнозом. Компания остаётся эмитентом облигаций серий 001P-04 и 001P-05.</li>
+</ul>
+<p>По данным Cbonds (записи от 10.11):</p>
+<ul>
+<li>у «Бамтоннельстрой-АМТ» рейтинг Эксперт РА ruA+, прогноз стабильный;</li>
+<li>у Селектела — рейтинг АКРА A(RU), прогноз стабильный;</li>
+<li>у «Службы защиты активов» — рейтинг НРА BB|ru|, прогноз стабильный.</li>
+</ul>
+<p>Без установленной даты действия, по сообщениям канала Smart-lab:</p>
+<ul>
+<li>НКР подтвердило рейтинг «Аэрофьюэлз Групп» на уровне A.ru и изменило прогноз на позитивный;</li>
+<li>НРА присвоило АО «Цифровые привычки» рейтинг A-|ru| со стабильным прогнозом (уровень и прогноз совпадают с данными Cbonds);</li>
+<li>Эксперт РА поставил рейтинг «Селигдара» ruA под наблюдение (уровень совпадает с данными Cbonds).</li>
+</ul></div></div>
+      </details>
+      <details class="ev">
+        <summary><span class="evdate">10–13.11</span>
+        <span>«ИКС 5 ФИНАНС» разместил флоатер на 22 млрд руб. (КС+130 б.п.), «Газпром капитал» собрал книгу под КС+150 б.п.</span></summary>
+        <div class="evb"><div class="prose"><ul>
+<li>«ИКС 5 ФИНАНС» 10.11 собрал заявки на 10-летний флоатер 003P-24 с офертой через 2 года. Ориентир спреда к КС не выше 140 б.п. снижен до финальных 130 б.п. Объём — 22 млрд руб. при ориентире не менее 10 млрд руб. Техразмещение прошло 13.11; выпуску присвоены рейтинги НКР AAA.ru и Эксперт РА ruAAA. 13.11 в режиме переговорных сделок по выпуску прошло 12,02 млрд руб. (11 сделок, цена 99,81%) — это перепродажа в первые дни после размещения.</li>
+<li>«Газпром капитал» 13.11 собрал книгу на трёхлетний флоатер БО-003Р-31; ориентир спреда снижен с не выше 160 до 150 б.п. По сообщениям, объём установлен в 50 млрд руб. при первоначальном ориентире не менее 20 млрд руб. Техразмещение — 18.11.</li>
+<li>Нижегородская область 12.11 разместила трёхлетние облигации 34018 на 20 млрд руб. со спредом к КС 200 б.п.; начальный ориентир — не выше 250 б.п.</li>
+</ul>
+<p>Всего в периоде закрыто 11 книг заявок, ещё 5 выпусков размещены без публично объявленной книги.</p></div></div>
+      </details>
+      <details class="ev">
+        <summary><span class="evdate">за нед.</span>
+        <span>Суд ввёл наблюдение в отношении «ЕвроТранса»; «Соби-лизинг» вынесет реструктуризацию дефолтных выпусков на собрание 24.11</span></summary>
+        <div class="evb"><div class="prose"><ul>
+<li>В сообщениях от 12.11: Арбитражный суд Московской области признал обоснованным заявление Сбербанка о банкротстве ПАО «ЕвроТранс» и ввёл процедуру наблюдения. Задолженность перед банком — около 38 млн руб. (36,6 млн руб. — основной долг); рассмотрение дела по существу назначено на 24 мая следующего года. 09.11 сообщалось о приостановке работы сети АЗС «Трасса» и изъятии АЗС «Газпромбанк Лизингом».</li>
+<li>ООО «Соби-лизинг» 24.11 проведёт общее собрание владельцев дефолтных выпусков 001P-03 – 001P-07. По сообщениям, компания предлагает возобновить ежемесячные купоны в январе 2027 года по ставке КС + 1,25%, но не более 15,25% годовых, и продлить погашение выпусков до 2028–2030 годов без списания основного долга.</li>
+</ul></div></div>
       </details>
     </div>
   </div>
@@ -422,41 +787,55 @@
     <span class="chev">+</span>
   </summary>
   <div class="sbody">
-    <div class="block"><div class="prose"><p>1. Длинный конец ОФЗ и новости о предложении.
-Рост доходностей длинного участка ОФЗ (7–10Y +18,9…+21,5 б.п.) пришёлся на вторую половину недели. Он совпал по времени с тремя публикациями:
-- материалы ЦБ 05.11 о более длительном сохранении умеренно жёстких условий и повышенной траектории ставки;
-- сообщения 05.11 о разрешении Минфину дополнительных заимствований до 1 трлн руб.;
-- сообщение 06.11 о регистрации новых выпусков ОФЗ на 1,05 трлн руб. со сроками погашения 2031–2037 гг.
-
-06.11 доходность 10Y выросла на 20,3 б.п. при снижении 1Y и 3Y примерно на 16 б.п. В тот же день оборот ОФЗ был максимальным за неделю (19,65 млрд руб.), как и объёмы в бакетах 5–10 и более 10 лет (7,63 и 8,84 млрд руб.). Аналитики «Вектор Капитала» и Инго Банка в оценках от 07.11 связывают дополнительное предложение с давлением на длинные ОФЗ. Прямая причинная связь движения 06.11 с конкретным событием в сообщениях не установлена.
-
-2. Расхождение индикаторов ожиданий.
-На горизонте до полугода ставки денежного рынка и свопы сместились к смягчению:
-- спред RUSFAR 3M к ключевой ставке −4 б.п.;
-- средняя ставка по свопам на 3–6 месяцев −5,5…−6,3 б.п.
-
-При этом новостной фон по ДКП стал ястребиным: взвешенный баланс +1,80, сдвиг во второй половине недели +2,40. Свопы на 2–6 лет выросли на 3–6 б.п., длинные ОФЗ — на 16–21 б.п. Ястребиные сигналы недели отразились в средне- и долгосрочных ставках, но не в ожиданиях на ближайшие месяцы. На заседании 18.12 по-прежнему ожидается удержание: модель даёт 70%, пороговое правило — «удержание».
-
-3. Флоатеры и фиксированные AAA-бумаги.
-Сужение скорр. маржи AAA-флоатеров 05–06.11 (с 153 до 138 б.п.) совпало по времени с публикацией ЦБ о необходимости дольше поддерживать умеренно жёсткие условия. Рост спроса на флоатеры может отражать ожидания более длительного сохранения высокой ставки либо неопределённость её траектории; однозначно установить причину нельзя. Доля флоатеров в корпоративном обороте выросла к предыдущей неделе на 2,4 п.п. до 39,0%; 06.11 она составила 44%, доля флоатеров в ОФЗ в тот же день — 16%. Фиксированный AAA-сегмент 06.11 отстал от ОФЗ: G-спред расширился на 31 б.п.
-
-4. Рост корпоративного оборота.
-Среднедневной корпоративный оборот вырос на 37,2%. Этот рост сопровождался активными торгами недавно размещённым выпуском Атомэнергопром 001P-19: он был лидером 05.11 и 06.11 (до 15% корпоративного оборота дня), а в РПС 05.11 по нему прошла перепродажа после размещения. Максимальный корпоративный оборот 05.11 (17,49 млрд руб.) при этом не был сосредоточен в одной бумаге: лидер дня дал 8%.
-
-5. Кредитные события.
-Кредитные события недели касались эмитентов, не входящих в число лидеров дневного и недельного оборота:
-- технические дефолты МГКЛ;
-- дефолт и рейтинг ruD у «РЕГИОН-ПРОДУКТА»;
-- падение котировок «Селигдара» 05.11;
-- договорённость кредиторов «Самолёта» 05.11.
-
-На средних показателях AAA-сегмента они не выделяются.
-
-6. Недельная инфляция.
-Данные о дефляции 0,04% за 27.10–02.11 и годовой инфляции 6,95% вышли после завершения торгов 06.11. На обороты и кривую отчётной недели они повлиять не могли.
-
-7. Курс рубля.
-Ослабление рубля (доллар +1,96%, юань +1,47% по официальному курсу ЦБ) шло параллельно с ростом длинных доходностей ОФЗ. В новостных сигналах по ДКП фактор курса уравновешен: один ястребиный и один голубиный сигнал. Объявленное увеличение покупок валюты Минфином начинается 09.11, после окончания периода.</p></div></div>
+    <div class="block"><div class="prose"><h3>1. Риторика ЦБ и кривая ОФЗ.</h3>
+<p>Даты выступлений Набиуллиной совпали с ростом длинного конца кривой:</p>
+<ul>
+<li>после выступления 09.11 доходность 10Y 10.11 выросла на 11,9 б.п., 1Y — снизилась на 16,5 б.п.;</li>
+<li>в день выступления 12.11 доходность 10Y выросла на 6,7 б.п.;</li>
+<li>за неделю длинный конец вырос (10Y +9,8 б.п.), участок 1–3 года снизился (2Y −11,3 б.п.), наклон 10Y−1Y +18 б.п.</li>
+</ul>
+<p>Совпадение по времени есть, но прямую причинную связь имеющиеся сведения не устанавливают.</p>
+<h3>2. Аукционы ОФЗ 11.11 и вторичный рынок.</h3>
+<p>В день аукционов, где спрос оценивался как более слабый, чем в предыдущие недели:</p>
+<ul>
+<li>биржевой оборот ОФЗ достиг максимума недели (24,22 млрд руб.);</li>
+<li>доля бакета более 10 лет составила 49% (11,89 млрд руб.);</li>
+<li>доходность 10Y снизилась на 10,3 б.п.</li>
+</ul>
+<p>Первичное размещение (88,87 млрд руб. по номиналу с учётом доразмещения 26250) в обороты не входит.</p>
+<h3>3. Расхождение новостного фона и денежного рынка (отдельный пункт).</h3>
+<p>Новостной фон по ДКП был ястребиным (взвешенный баланс +0,70). Рыночные индикаторы на горизонте года сместились к смягчению:</p>
+<ul>
+<li>спред RUSFAR 3M к ключевой ставке сузился с +6 до +3 б.п.;</li>
+<li>своп на 1 год снизился на 10 б.п.;</li>
+<li>средняя КС на год вперёд по свопам — на 9 б.п., до 13,54%.</li>
+</ul>
+<p>Ястребиному фону соответствовали только рост доходностей длинных ОФЗ (10Y +9,8 б.п.) и сохранение ожиданий около 13,9% на ближайшие 3 месяца. Своп на 10 лет при этом не изменился.</p>
+<h3>4. Кредитные события и корпоративный сегмент.</h3>
+<p>На неделе произошли:</p>
+<ul>
+<li>неисполнение в срок оферты «Самолета» 09.11 с выкупом 11.11;</li>
+<li>техдефолты МГКЛ (10–11.11), «СибСульфура», «Агро-Фрегата» и «Урожая»;</li>
+<li>понижения рейтингов «Балтийского лизинга» и «Флита».</li>
+</ul>
+<p>Одновременно биржевой корпоративный оборот снизился на 17,2% в расчёте на торговый день, а G-спред AAA вырос: переоценка сопоставимых бумаг +13,1 б.п. к прошлой неделе, максимум недели 94 б.п. — 10.11. События касаются эмитентов вне корзины AAA, и связь между ними и динамикой спредов AAA не установлена.</p>
+<h3>5. Первичные флоатеры и вторичный рынок.</h3>
+<ul>
+<li>Финальные спреды крупных флоатеров к КС: «ИКС 5 ФИНАНС» — 130 б.п., «Газпром капитал» — 150 б.п., «СОПФ ДОМ.РФ» — 155 б.п., Нижегородская область — 200 б.п.</li>
+<li>Средняя скорр. маржа AAA флоатеров на вторичном рынке — 141 б.п. Это разные показатели: купонный спред против маржи с учётом цены.</li>
+<li>Доля флоатеров в корпоративном биржевом обороте выросла на 2,3 п.п.</li>
+<li>Перепродажа ИКС 5 ФИНАНС 003P-24 в день техразмещения (13.11) дала 12,02 млрд руб. в РПС из 12,63 млрд руб. корпоративных сделок «после размещения» за день.</li>
+</ul>
+<h3>6. Курс рубля и операции Минфина.</h3>
+<p>Официальный курс доллара за период практически не изменился (82,14 → 82,15 руб.), юань подорожал на 0,41%. К 02.11 доллар вырос на 1,98%, юань — на 1,88%. В новостном фоне по ДКП курс рубля дал три ястребиных сигнала.</p>
+<p>По объявлению Минфина, с 09.11 по 04.12 ведомство покупает валюту и золото по бюджетному правилу на 15,6 млрд руб. в день. С учётом ежедневных продаж ЦБ на 0,58 млрд руб. нетто-покупки составляют 15,02 млрд руб. в день против 12,12 млрд руб. месяцем ранее.</p>
+<h3>7. Бюджет и предложение ОФЗ.</h3>
+<ul>
+<li>Дефицит за январь–октябрь — 5,234 трлн руб.; оценка на год в пояснительной записке к проекту бюджета на 2027–2029 годы — 7 344,9 млрд руб.</li>
+<li>По оценке Банка России, до конца года предстоит разместить ОФЗ ещё примерно на 2 трлн руб.</li>
+<li>На неделе спрос на аукционах был слабее предыдущих недель, а доходности длинных ОФЗ выросли.</li>
+</ul>
+<p>Факты приводятся рядом; причинно-следственную связь между ними сообщения недели не устанавливают.</p></div></div>
   </div>
 </details>
 
@@ -468,22 +847,32 @@
 </div>
 
 <script>
-const D = {"dates": ["02.11", "03.11", "05.11", "06.11"], "dows": ["пн", "вт", "чт", "пт"], "ofz": [15.48, 11.64, 16.0, 19.65], "corp": [14.45, 13.38, 17.49, 14.39], "tenors": ["4M", "6M", "9M", "1Y", "2Y", "3Y", "4Y", "5Y", "7Y", "8Y", "9Y", "10Y", "15Y"], "days": [120, 180, 270, 365, 730, 1095, 1460, 1825, 2555, 2920, 3285, 3650, 5475], "curve": [[13.333, 13.564, 13.87, 14.145, 14.982, 15.509, 15.848, 16.072, 16.34, 16.424, 16.489, 16.539, 16.68], [13.324, 13.604, 13.964, 14.274, 15.157, 15.668, 15.967, 16.145, 16.332, 16.385, 16.424, 16.455, 16.543], [13.304, 13.528, 13.826, 14.093, 14.91, 15.439, 15.787, 16.023, 16.308, 16.398, 16.467, 16.521, 16.665], [13.465, 13.708, 14.029, 14.315, 15.169, 15.685, 16.002, 16.2, 16.415, 16.475, 16.518, 16.551, 16.63], [13.344, 13.576, 13.884, 14.158, 14.986, 15.523, 15.901, 16.18, 16.529, 16.63, 16.702, 16.754, 16.843]], "slope": [155.7, 129.8, 161.1, 138.2, 176.8], "gspread": [53.9, 48.7, 41.6, 72.6], "margin": [147.7, 152.6, 137.7, 137.6], "top": [["Атомэнергопром, 001P-19", 3.44, 5.77, 5211], ["ВЭБ.РФ, ПБО-002Р-58", 2.01, 3.37, 5496], ["СФО СБ Секьюритизация 6, АС", 1.85, 3.09, 4243], ["МТС, 003P-04", 1.79, 3.0, 1000], ["РусГидро, БО-002Р-05", 1.36, 2.28, 872], ["ВЭБ.РФ, ПБО-002Р-61", 1.32, 2.21, 760]], "dayLead": [["02.11", "РусГидро, БО-002Р-05", 1.23, 8.5], ["03.11", "МТС, 003P-04", 1.18, 8.9], ["05.11", "Атомэнергопром, 001P-19", 1.32, 7.5], ["06.11", "Атомэнергопром, 001P-19", 2.13, 14.8]], "rateOfz": {"Фиксированная": 88.4, "Плавающая": 11.6}, "rateCorp": {"Фиксированная": 61.0, "Плавающая": 39.0}, "termOfz": {"0-1 год": 6.5, "1-3 года": 5.1, "3-5 лет": 4.6, "5-10 лет": 36.7, "более 10 лет": 47.2}, "termCorp": {"0-1 год": 22.6, "1-3 года": 48.4, "3-5 лет": 20.4, "5-10 лет": 8.1, "более 10 лет": 0.4}};
+const D = {"dates": ["09.11", "10.11", "11.11", "12.11", "13.11"], "dows": ["пн", "вт", "ср", "чт", "пт"], "ofz": [21.68, 20.37, 24.22, 12.98, 13.33], "corp": [16.86, 12.98, 10.76, 11.44, 9.77], "tenors": ["4M", "6M", "9M", "1Y", "2Y", "3Y", "4Y", "5Y", "7Y", "8Y", "9Y", "10Y", "15Y"], "days": [120, 180, 270, 365, 730, 1095, 1460, 1825, 2555, 2920, 3285, 3650, 5475], "curve": [[13.365, 13.56, 13.827, 14.084, 14.961, 15.566, 15.971, 16.235, 16.514, 16.579, 16.619, 16.645, 16.714], [13.081, 13.311, 13.624, 13.919, 14.895, 15.558, 16.005, 16.301, 16.619, 16.693, 16.736, 16.764, 16.822], [13.236, 13.442, 13.724, 13.998, 14.927, 15.567, 15.994, 16.271, 16.555, 16.614, 16.645, 16.661, 16.681], [13.344, 13.528, 13.784, 14.037, 14.929, 15.563, 15.996, 16.281, 16.589, 16.66, 16.702, 16.728, 16.773], [13.411, 13.564, 13.781, 14.006, 14.848, 15.482, 15.932, 16.238, 16.58, 16.662, 16.711, 16.743, 16.809]], "slope": [168.4, 186.9, 173.4, 179.9, 189.5], "gspread": [76.1, 93.8, 65.1, 77.4, 85.7], "margin": [141.4, 141.0, 136.7, 145.8, 139.9], "top": [["ВЭБ.РФ, ПБО-002Р-58", 2.75, 4.45, 5597], ["Атомэнергопром, 001P-19", 2.74, 4.43, 6453], ["АЛРОСА, 002P-01", 2.02, 3.27, 592], ["РЖД, 001Р-54R", 1.66, 2.69, 806], ["Русбонд-Удобрения, 001Р-02", 1.26, 2.04, 2381], ["СФО СБ Секьюритизация 7, АС", 1.18, 1.91, 2532]], "dayLead": [["09.11", "Атомэнергопром, 001P-19", 1.32, 7.8], ["10.11", "АЛРОСА, 002P-01", 1.57, 12.1], ["11.11", "РЖД, 001Р-54R", 0.64, 6.0], ["12.11", "ВЭБ.РФ, ПБО-002Р-58", 1.19, 10.4], ["13.11", "ВЭБ.РФ, ПБО-002Р-58", 0.45, 4.7]], "rateOfz": {"Фиксированная": 85.8, "Плавающая": 14.2}, "rateCorp": {"Фиксированная": 58.7, "Плавающая": 41.3}, "termOfz": {"0-1 год": 6.9, "1-3 года": 3.7, "3-5 лет": 15.5, "5-10 лет": 34.3, "более 10 лет": 39.6}, "termCorp": {"0-1 год": 17.9, "1-3 года": 56.8, "3-5 лет": 17.9, "5-10 лет": 7.1, "более 10 лет": 0.3}};
 
 const NS='http://www.w3.org/2000/svg';
 const ru=(v,d=2)=>Number(v).toLocaleString('ru-RU',{minimumFractionDigits:d,maximumFractionDigits:d});
 const C={acc:'#2ECDA7',neg:'#FF7B7B',mut:'#8A93B0',gray:'#6B7899',bar:'#5A6894'};
 function svg(w,h){const s=document.createElementNS(NS,'svg');s.setAttribute('viewBox',`0 0 ${w} ${h}`);
-  s.setAttribute('preserveAspectRatio','xMidYMid meet');return s}
+  s.setAttribute('preserveAspectRatio','xMidYMid meet');s.style.width=w+'px';return s}
 function el(p,t,a={},txt){const e=document.createElementNS(NS,t);for(const k in a)e.setAttribute(k,a[k]);
   if(txt!=null)e.textContent=txt;p.appendChild(e);return e}
 function path(p,pts,stroke,w=2,extra={}){const d=pts.map((q,i)=>(i?'L':'M')+q[0].toFixed(1)+' '+q[1].toFixed(1)).join(' ');
   return el(p,'path',Object.assign({d,fill:'none',stroke,'stroke-width':w,'stroke-linejoin':'round','stroke-linecap':'round'},extra))}
 const $=id=>document.getElementById(id);
 
+function chartWidth(id, minimum){
+  const box=$(id),closed=[];
+  for(let p=box.parentElement;p;p=p.parentElement)if(p.tagName==='DETAILS'&&!p.open){closed.push(p);p.open=true}
+  const width=Math.floor(box.clientWidth);
+  closed.forEach(p=>p.open=false);
+  return Math.max(minimum,width);
+}
+function renderVisuals(){
+  ['curveChart','slopeChart','spreadChart','turnChart','rateTypeChart','termChart','curveTable','topTable','dayTable']
+    .forEach(id=>$(id)?.replaceChildren());
 /* кривая + изменение по точкам */
 if(D.curve && D.curve.length && $('curveChart')){
-  const W=1000,Hc=248,Hd=104,gap=32,PL=54,PR=16,PT=14,H=PT+Hc+gap+Hd+34;
+  const W=chartWidth('curveChart',760),Hc=220,Hd=180,gap=40,PL=54,PR=30,PT=18,H=PT+Hc+gap+Hd+34;
   const s=svg(W,H),xs=D.days.map(d=>Math.sqrt(d)),x0=Math.min(...xs),x1=Math.max(...xs);
   const X=v=>PL+(Math.sqrt(v)-x0)/(x1-x0)*(W-PL-PR);
   const a=D.curve[0],b=D.curve[D.curve.length-1];
@@ -500,20 +889,20 @@ if(D.curve && D.curve.length && $('curveChart')){
   path(s,D.days.map((d,i)=>[X(d),Y(b[i])]),C.acc,3);
   D.days.forEach((d,i)=>{el(s,'circle',{cx:X(d),cy:Y(a[i]),r:3,fill:C.gray});
     el(s,'circle',{cx:X(d),cy:Y(b[i]),r:3.6,fill:C.acc})});
-  const dy=PT+Hc+gap,deltas=D.days.map((d,i)=>(b[i]-a[i])*100),dmax=Math.max(...deltas.map(Math.abs))||1;
+  const dy=PT+Hc+gap+Hd/2,deltas=D.days.map((d,i)=>(b[i]-a[i])*100),dmax=Math.max(...deltas.map(Math.abs))||1;
   el(s,'line',{x1:PL,x2:W-PR,y1:dy,y2:dy,class:'ax'});
-  el(s,'text',{x:W-PR,y:dy-8,class:'axlab','text-anchor':'end',fill:C.mut},'изменение за период, б.п.');
+  el(s,'text',{x:W-PR,y:dy-Hd/2-10,class:'axlab','text-anchor':'end',fill:C.mut},'изменение за период, б.п.');
   const bw=(W-PL-PR)/D.days.length*0.46;
-  deltas.forEach((v,i)=>{const h=Math.abs(v)/dmax*(Hd-16);
+  deltas.forEach((v,i)=>{const h=Math.abs(v)/dmax*(Hd/2-18);
     el(s,'rect',{x:X(D.days[i])-bw/2,y:v<0?dy:dy-h,width:bw,height:h,rx:2,fill:v<0?C.acc:C.neg,opacity:.9});
-    el(s,'text',{x:X(D.days[i]),y:dy+h+13,class:'axlab','text-anchor':'middle',fill:'#8E9AB8'},ru(v,0))});
+    el(s,'text',{x:X(D.days[i]),y:v<0?dy+h+16:dy-h-7,class:'axlab','text-anchor':'middle',fill:'#8E9AB8'},ru(v,0))});
   D.tenors.forEach((t,i)=>el(s,'text',{x:X(D.days[i]),y:H-6,class:'axlab t','text-anchor':'middle'},t));
   $('curveChart').appendChild(s);
 }
 
 /* наклон по дням */
 if(D.slope && D.slope.length && $('slopeChart')){
-  const W=460,H=190,PL=44,PR=14,PT=16,PB=30,s=svg(W,H);
+  const W=chartWidth('slopeChart',260),H=210,PL=44,PR=30,PT=24,PB=34,s=svg(W,H);
   const lo=Math.min(...D.slope)-15,hi=Math.max(...D.slope)+15;
   const X=i=>PL+i*(W-PL-PR)/Math.max(D.slope.length-1,1),Y=v=>PT+(H-PT-PB)-(v-lo)/(hi-lo)*(H-PT-PB);
   el(s,'line',{x1:PL,x2:W-PR,y1:Y(lo),y2:Y(lo),class:'ax'});
@@ -537,7 +926,7 @@ if(D.curve && D.curve.length && $('curveTable')){
 
 /* спреды */
 if(((D.gspread&&D.gspread.length)||(D.margin&&D.margin.length)) && $('spreadChart')){
-  const W=620,H=250,PL=44,PR=16,PT=18,PB=32,s=svg(W,H);
+  const W=chartWidth('spreadChart',278),H=270,PL=40,PR=28,PT=28,PB=42,s=svg(W,H);
   const all=[...(D.gspread||[]),...(D.margin||[])];
   const lo=Math.min(...all)-10,hi=Math.max(...all)+10,n=Math.max((D.gspread||D.margin).length-1,1);
   const X=i=>PL+i*(W-PL-PR)/n,Y=v=>PT+(H-PT-PB)-(v-lo)/(hi-lo)*(H-PT-PB);
@@ -546,14 +935,14 @@ if(((D.gspread&&D.gspread.length)||(D.margin&&D.margin.length)) && $('spreadChar
     path(s,arr.map((v,i)=>[X(i),Y(v)]),col,2.6);
     arr.forEach((v,i)=>{el(s,'circle',{cx:X(i),cy:Y(v),r:4,fill:col});
       el(s,'text',{x:X(i),y:Y(v)-12,class:'axlab','text-anchor':'middle',fill:col,'font-weight':'700'},ru(v,0))})});
-  (D.dates||[]).forEach((d,i)=>el(s,'text',{x:X(i),y:H-10,class:'axlab t','text-anchor':'middle'},d+' '+(D.dows[i]||'')));
+  (D.dates||[]).forEach((d,i)=>{el(s,'text',{x:X(i),y:H-25,class:'axlab t','text-anchor':'middle'},d);el(s,'text',{x:X(i),y:H-8,class:'axlab','text-anchor':'middle'},D.dows[i]||'')});
   el(s,'text',{x:PL-8,y:PT-4,class:'axlab','text-anchor':'end',fill:C.mut},'б.п.');
   $('spreadChart').appendChild(s);
 }
 
 /* обороты по дням */
 if(D.dates && D.dates.length && $('turnChart')){
-  const W=620,H=250,PL=48,PR=16,PT=22,PB=34,s=svg(W,H),n=D.dates.length;
+  const W=chartWidth('turnChart',278),H=280,PL=52,PR=20,PT=40,PB=48,s=svg(W,H),n=D.dates.length;
   const tot=D.ofz.map((o,i)=>o+D.corp[i]),hi=Math.max(...tot)*1.15;
   const X=i=>PL+i*(W-PL-PR)/n+((W-PL-PR)/n)*0.5,bw=(W-PL-PR)/n*0.52;
   const Y=v=>PT+(H-PT-PB)-v/hi*(H-PT-PB);
@@ -567,9 +956,9 @@ if(D.dates && D.dates.length && $('turnChart')){
     el(s,'rect',{x:X(i)-bw/2,y:Y(o),width:bw,height:Y(0)-Y(o),fill:C.acc,rx:2});
     el(s,'rect',{x:X(i)-bw/2,y:Y(o+c),width:bw,height:Y(0)-Y(c),fill:C.bar,rx:2});
     el(s,'text',{x:X(i),y:Y(o+c)-9,class:'axlab','text-anchor':'middle',fill:'#fff','font-weight':'700'},ru(o+c,1));
-    el(s,'text',{x:X(i),y:H-12,class:'axlab t','text-anchor':'middle'},D.dates[i]);
-    el(s,'text',{x:X(i),y:H-2,class:'axlab','text-anchor':'middle',fill:'#6E7896'},D.dows[i]||'')});
-  el(s,'text',{x:PL-8,y:PT-6,class:'axlab','text-anchor':'end',fill:C.mut},'млрд ₽');
+    el(s,'text',{x:X(i),y:H-25,class:'axlab t','text-anchor':'middle'},D.dates[i]);
+    el(s,'text',{x:X(i),y:H-8,class:'axlab','text-anchor':'middle',fill:'#6E7896'},D.dows[i]||'')});
+  el(s,'text',{x:PL,y:PT-20,class:'axlab','text-anchor':'end',fill:C.mut},'млрд ₽');
   $('turnChart').appendChild(s);
 }
 
@@ -595,7 +984,7 @@ if($('rateTypeChart')){
 /* структура по срокам */
 if($('termChart') && D.termOfz && Object.keys(D.termOfz).length){
   const buckets=['0-1 год','1-3 года','3-5 лет','5-10 лет','более 10 лет'];
-  const W=1000,H=210,PL=100,PR=20,PT=26,PB=28,s=svg(W,H),gw=(W-PL-PR)/buckets.length;
+  const W=chartWidth('termChart',580),H=250,PL=54,PR=20,PT=40,PB=32,s=svg(W,H),gw=(W-PL-PR)/buckets.length;
   const vals=buckets.flatMap(b=>[D.termOfz[b]||0,D.termCorp[b]||0]);
   const hi=Math.max(...vals)*1.2||100;
   const Y=v=>PT+(H-PT-PB)-v/hi*(H-PT-PB);
@@ -631,6 +1020,21 @@ if(D.dayLead && D.dayLead.length && $('dayTable')){
      <td class="r num" style="color:${sh>=30?'#FF7B7B':'#8A93B0'};font-weight:${sh>=30?'700':'400'}">${sh!=null?ru(sh,1)+'%':'—'}</td></tr>`));
 }
 
+}
+function updateScrollHints(){
+  document.querySelectorAll('.table-scroll,.chart-scroll').forEach(el=>{
+    const hint=$(el.getAttribute('aria-describedby'));
+    if(hint)hint.hidden=el.scrollWidth<=el.clientWidth+1;
+  });
+}
+renderVisuals();updateScrollHints();
+let resizeFrame=0,lastWidth=0;
+new ResizeObserver(entries=>{
+  const width=Math.round(entries[0].contentRect.width);
+  if(width===lastWidth)return;lastWidth=width;
+  cancelAnimationFrame(resizeFrame);resizeFrame=requestAnimationFrame(()=>{renderVisuals();updateScrollHints()});
+}).observe(document.querySelector('.wrap'));
+document.querySelectorAll('details.sec').forEach(s=>s.addEventListener('toggle',updateScrollHints));
 /* разворачивание секций */
 (function(){
   const secs=[...document.querySelectorAll('details.sec')];
@@ -648,11 +1052,20 @@ if(D.dayLead && D.dayLead.length && $('dayTable')){
     if(t&&t.classList.contains('sec')){secs.forEach(x=>x.open=(x===t));
       setTimeout(()=>t.scrollIntoView({block:'start'}),60)}}
   sync();
-  $('btnPrint').addEventListener('click',()=>{
-    secs.forEach(s=>s.open=true);sync();setTimeout(()=>window.print(),120)});
+  let printState=null;
+  const preparePrint=()=>{
+    if(printState)return;
+    printState=[...document.querySelectorAll('details')].map(node=>[node,node.open]);
+    printState.forEach(([node])=>node.open=true);sync();
+  };
+  window.addEventListener('beforeprint',preparePrint);
+  window.addEventListener('afterprint',()=>{
+    if(!printState)return;printState.forEach(([node,open])=>node.open=open);printState=null;sync();
+  });
+  $('btnPrint').addEventListener('click',()=>{preparePrint();setTimeout(()=>window.print(),120)});
 })();
 
 </script>
-<!-- Cloudflare Web Analytics --><script type='module' src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{"token": "dd6d1ddb26db4e11a6aeecab9db58414"}'></script><!-- End Cloudflare Web Analytics -->
+
 </body>
 </html>
